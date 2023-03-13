@@ -1,6 +1,7 @@
 package loarkMgmt.ui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +16,7 @@ import loarkMgmt.util.userSetUtil;
 
 public class LAM extends JFrame{
 	
-	private JButton loadUserData;
+	private JButton loadUserDataBtn;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -43,11 +44,13 @@ public class LAM extends JFrame{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() = loadUserData) {
+			if(e.getSource() = loadUserDataBtn) {
 				List<JSONObject> objList = fileModuleUtil.loadUserData();
+			}else {
+				e.getID();
 			}
 		}
-	}
+	};
 	
 	
 	
