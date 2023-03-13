@@ -2,12 +2,12 @@ package loarkMgmt.util;
 
 import org.json.simple.JSONObject;
 
-import loarkMgmt.dto.userConfig;
+import loarkMgmt.dto.userDto;
 
 public class userSetUtil {
 	
 	public static JSONObject userSet(String server, String name, int level, String charClass, String charJob) {
-		userConfig uc = new userConfig();
+		userDto uc = new userDto();
 		uc.setServer(server);
 		uc.setName(name);
 		uc.setLevel(level);
