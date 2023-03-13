@@ -54,7 +54,7 @@ public class userConfig {
 		
 		JSONObject obj = new JSONObject();
 		obj.put("server",server);
-		obj.put("charicterInfo", arr);
+		obj.put("characterInfo", arr);
 		
 		return obj;
 		

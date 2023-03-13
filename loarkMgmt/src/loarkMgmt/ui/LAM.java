@@ -1,18 +1,61 @@
 package loarkMgmt.ui;
 
+import java.awt.EventQueue;
+import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import org.json.simple.JSONObject;
 
-import loarkMgmt.dto.userConfig;
+import loarkMgmt.util.fileModuleUtil;
 import loarkMgmt.util.userSetUtil;
 
-public class LAM {
+public class LAM extends JFrame{
+	
+	private JButton loadUserData;
 
 	public static void main(String[] args) {
-		
-		JSONObject obj = userSetUtil.userSet("ÇÑ±¹", "±Ç±¤¿ø", 28, "free", "it");
-		
-		String k = obj.toString();
-		System.out.println(k);
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				try{
+					LAM frame = new LAM();
+					frame.setVisible(true);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
-
+	
+	public void setButtonStatus(JButton button, boolean enabled) {
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				button.setEnabled(enabled);
+			}
+		});
+	}
+	public ActionListener buttonActionListener = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() = loadUserData) {
+				List<JSONObject> objList = fileModuleUtil.loadUserData();
+			}
+		}
+	}
+	
+	
+	
 }
+
+/*
+ * try { JSONObject obj = userSetUtil.userSet("ÇÑ±¹", "±Ç±¤¿ø", 28, "free", "it");
+ * fileModuleUtil.saveUserData(obj); String k = obj.toString();
+ * System.out.println(k); } catch (Exception e) { // TODO Auto-generated catch
+ * block e.printStackTrace(); }
+ */
