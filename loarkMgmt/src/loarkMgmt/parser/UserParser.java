@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 
-public class userParser {
+public class UserParser {
 
 	public static JSONObject parse(File fileList){
 		JSONParser parser = new JSONParser();

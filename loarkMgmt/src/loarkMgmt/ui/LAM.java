@@ -11,8 +11,8 @@ import javax.swing.JFrame;
 
 import org.json.simple.JSONObject;
 
-import loarkMgmt.util.fileModuleUtil;
-import loarkMgmt.util.setUtil;
+import loarkMgmt.util.FileModuleUtil;
+import loarkMgmt.util.SetUtil;
 
 public class LAM extends JFrame{
 	

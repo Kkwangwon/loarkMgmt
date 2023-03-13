@@ -11,9 +11,9 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import loarkMgmt.parser.userParser;
+import loarkMgmt.parser.UserParser;
 
-public class fileModuleUtil {
+public class FileModuleUtil {
 	
 	private static String BASE_DIR = "C://userConfig/";
 	
@@ -54,7 +54,7 @@ public class fileModuleUtil {
 		List<JSONObject> objList = new ArrayList<>();
 		if(dir.listFiles() !=null && dir.listFiles().length>0) {
 			for(int i = 0; i<fileList.length; i++) {
-				obj = userParser.parse(fileList[i]);
+				obj = UserParser.parse(fileList[i]);
 				objList.add(obj);
 			}
 		}
@@ -100,7 +100,7 @@ public class fileModuleUtil {
 		List<JSONObject> objList = new ArrayList<>();
 		if(dir.listFiles() !=null && dir.listFiles().length>0) {
 			for(int i = 0; i<fileList.length; i++) {
-				obj = userParser.parse(fileList[i]);
+				obj = UserParser.parse(fileList[i]);
 				objList.add(obj);
 			}
 		}

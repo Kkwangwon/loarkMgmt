@@ -3,7 +3,7 @@ package loarkMgmt.dto;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class userDto {
+public class UserDto {
 	private String name;
 	private int level;
 	private String charClass;

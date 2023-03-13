@@ -2,7 +2,7 @@ package loarkMgmt.dto;
 
 import org.json.simple.JSONObject;
 
-public class homeWorkDto {
+public class HomeWorkDto {
  private boolean valtan;
  private boolean biackiss;
  private boolean kouku_saton;
