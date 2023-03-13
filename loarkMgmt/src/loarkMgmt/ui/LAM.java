@@ -17,7 +17,10 @@ import loarkMgmt.util.userSetUtil;
 public class LAM extends JFrame{
 	
 	private JButton loadUserDataBtn;
-
+	private JButton saveUserDataBtn;
+	private JButton loadUserHomeWorkDataBtn;
+	private JButton saveUserHomeWorkDataBtn;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
