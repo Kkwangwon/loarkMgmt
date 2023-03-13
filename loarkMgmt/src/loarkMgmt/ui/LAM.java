@@ -40,18 +40,18 @@ public class LAM extends JFrame{
 			}
 		});
 	}
-	public ActionListener buttonActionListener = new ActionListener() {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() = loadUserDataBtn) {
-				List<JSONObject> objList = fileModuleUtil.loadUserData();
-			}else {
-				e.getID();
-			}
-		}
-	};
-	
+//	public ActionListener buttonActionListener = new ActionListener() {
+//		
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			if(e.getSource() = loadUserDataBtn) {
+//				List<JSONObject> objList = fileModuleUtil.loadUserData();
+//			}else {
+//				e.getID();
+//			}
+//		}
+//	};
+//	
 	
 	
 }
