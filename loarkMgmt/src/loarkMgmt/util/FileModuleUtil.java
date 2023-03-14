@@ -46,6 +46,7 @@ public class FileModuleUtil {
 		}
 		
 	}
+	
 	//load loa userdata savefile
 	public static List<JSONObject> loadUserData() {
 		File dir = new File(BASE_DIR+"nameInfo/");
@@ -63,10 +64,10 @@ public class FileModuleUtil {
 	
 	
 	//make loa homework savefile
-	public static void saveHomeWorkData(JSONObject charObj, JSONObject homeWorkObj) throws Exception {
+	public static void saveHomeWorkData(String charName, JSONObject homeWorkObj) throws Exception {
 		try {
-			if(charObj != null) {
-				String homeWorkInfo = "homeWorkInfo/" + ((JSONObject) ((JSONArray) charObj.get("characterInfo")).get(0)).get("name").toString();
+			if(charName != null) {
+				String homeWorkInfo = "homeWorkInfo/" + charName;
 				
 				File file = new File(BASE_DIR+homeWorkInfo+".json");
 				
@@ -93,8 +94,8 @@ public class FileModuleUtil {
 	}
 	
 	//load loa homework savefile
-	public static List<JSONObject> loadHomeWorkData() {
-		File dir = new File(BASE_DIR+"homeWorkInfo/");
+	public static List<JSONObject> loadHomeWorkData(String charName) {
+		File dir = new File(BASE_DIR+"homeWorkInfo/"+charName);
 		File[] fileList = dir.listFiles();
 		JSONObject obj = null;
 		List<JSONObject> objList = new ArrayList<>();
