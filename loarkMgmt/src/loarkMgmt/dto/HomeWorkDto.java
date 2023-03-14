@@ -10,8 +10,6 @@ public class HomeWorkDto {
  private boolean illiakan;
  private boolean abyssOfKayangel;
  private boolean abyssOfVoldaik;
- private boolean chaos_dungeon;
- private boolean guardian_conquest;
  private boolean challenge_guardian_conquest;
  private boolean challenge_abyss_dungeon;
  
@@ -57,18 +55,6 @@ public boolean isAbyssOfVoldaik() {
 public void setAbyssOfVoldaik(boolean abyssOfVoldaik) {
 	this.abyssOfVoldaik = abyssOfVoldaik;
 }
-public boolean isChaos_dungeon() {
-	return chaos_dungeon;
-}
-public void setChaos_dungeon(boolean chaos_dungeon) {
-	this.chaos_dungeon = chaos_dungeon;
-}
-public boolean isGuardian_conquest() {
-	return guardian_conquest;
-}
-public void setGuardian_conquest(boolean guardian_conquest) {
-	this.guardian_conquest = guardian_conquest;
-}
 public boolean isChallenge_guardian_conquest() {
 	return challenge_guardian_conquest;
 }
@@ -92,8 +78,6 @@ public JSONObject toJson() {
 	obj.put("illiakan",illiakan);
 	obj.put("abyssOfKayangel",abyssOfKayangel);
 	obj.put("abyssOfVoldaik",abyssOfVoldaik);
-	obj.put("chaos_dungeon",chaos_dungeon);
-	obj.put("guardian_conquest",guardian_conquest);
 	obj.put("challenge_guardian_conquest",challenge_guardian_conquest);
 	obj.put("challenge_abyss_dungeon",challenge_abyss_dungeon);
 	

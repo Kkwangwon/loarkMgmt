@@ -8,6 +8,9 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 import org.json.simple.JSONObject;
 
@@ -16,10 +19,27 @@ import loarkMgmt.util.SetUtil;
 
 public class LAM extends JFrame{
 	
+	//main panel
+	private JPanel mainPanel;
+	
+	//button
 	private JButton loadUserDataBtn;
 	private JButton saveUserDataBtn;
 	private JButton loadUserHomeWorkDataBtn;
 	private JButton saveUserHomeWorkDataBtn;
+	
+	//textField
+	private JTextField serverTextField;
+	private JTextField nameTextField;
+	private JTextField levelTextField;
+	private JTextField charClassTextField;
+	private JTextField charJobTextField;
+	
+	//scrollPane
+	private JScrollPane charListScrollPane;
+	private JScrollPane homeWorkScrollPane;
+	
+	
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
