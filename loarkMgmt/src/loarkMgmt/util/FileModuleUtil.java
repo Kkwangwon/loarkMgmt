@@ -41,7 +41,6 @@ public class FileModuleUtil {
 				throw new Exception();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -87,7 +86,6 @@ public class FileModuleUtil {
 				throw new Exception();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -106,6 +104,16 @@ public class FileModuleUtil {
 			}
 		}
 		return objList;
+	}
+	
+	public static void userDelete(String charName) {
+		File file1 = new File(BASE_DIR+"nameInfo/"+charName+".json");
+		File file2 = new File(BASE_DIR+"homeWorkInfo/"+charName+".json");
+		if(file1.exists()) {
+			file1.delete();
+			file2.delete();
+		}
+		
 	}
 
 }

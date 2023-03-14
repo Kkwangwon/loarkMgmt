@@ -18,7 +18,7 @@ public class UserParser {
 		String str  = null;
 		String payload = null;
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileList), "UTF-8"));
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileList),"MS949"));
 			sb = new StringBuilder();
 			while((str = br.readLine()) !=null) {
 				sb.append(str);

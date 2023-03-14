@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -27,6 +28,7 @@ import javax.swing.border.EtchedBorder;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
+import loarkMgmt.ui.LAM.SetCharInfoFrame;
 import loarkMgmt.util.FileModuleUtil;
 import loarkMgmt.util.SetUtil;
 import loarkMgmt.util.TextAreaOutputStream;
@@ -85,7 +87,7 @@ public class LAM extends JFrame{
 	
 	//TextArea
 	private JTextArea logTextArea;
-	
+
 	public static void main(String[] args){
 		EventQueue.invokeLater(new Runnable() {
 			@Override
@@ -137,9 +139,26 @@ public class LAM extends JFrame{
 			if(e.getSource() == saveUserPaneBtn) {
 				try {
 					SetCharInfoFrame setCharInfoFrame = new SetCharInfoFrame();
+					setCharInfoFrame.setVisible(true);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				} 
+			}
+			if(e.getSource()==saveUserDataBtn) {
+				String server = setServerTextField.getText();
+				String name = setNameTextField.getText();
+				int level = Integer.parseInt(setLevelTextField.getText());
+				String charClass = setCharClassTextField.getText();
+				String charJob = setCharJobTextField.getText();
+				JSONObject userObj = SetUtil.userSet(server, name, level, charClass, charJob);
+				try {
+					SetCharInfoFrame setCharInfoFrame = new SetCharInfoFrame();
+					FileModuleUtil.saveUserData(userObj);
+					System.out.println("유저정보 저장 완료!");
+				} catch (Exception e1) {
+					e1.printStackTrace();
+					System.out.println("유저정보 저장 실패 ㅠ.ㅠ");
+				}
 			}
 		}
 	};
@@ -203,53 +222,54 @@ public class LAM extends JFrame{
 			setServerTextField.setText("");
 			setServerTextField.setColumns(12);
 			setServerTextField.setSize(200,30);
-			setServerTextField.setLocation(100,80);
+			setServerTextField.setLocation(95,60);
 			charSetPanel.add(setServerTextField);
 			
 			setNameTextField = new JTextField();
 			setNameTextField.setText("");
 			setNameTextField.setColumns(12);
 			setNameTextField.setSize(200,30);
-			setNameTextField.setLocation(100,130);
+			setNameTextField.setLocation(95,120);
 			charSetPanel.add(setNameTextField);
 			
 			setLevelTextField = new JTextField();
 			setLevelTextField.setText("");
 			setLevelTextField.setColumns(12);
 			setLevelTextField.setSize(200,30);
-			setLevelTextField.setLocation(100,150);
+			setLevelTextField.setLocation(95,180);
 			charSetPanel.add(setLevelTextField);
 			
 			setCharClassTextField = new JTextField();
 			setCharClassTextField.setText("");
 			setCharClassTextField.setColumns(12);
 			setCharClassTextField.setSize(200,30);
-			setCharClassTextField.setLocation(100,230);
+			setCharClassTextField.setLocation(95,240);
 			charSetPanel.add(setCharClassTextField);
 			
 			setCharJobTextField = new JTextField();
 			setCharJobTextField.setText("");
 			setCharJobTextField.setColumns(12);
 			setCharJobTextField.setSize(200,30);
-			setCharJobTextField.setLocation(100,280);
+			setCharJobTextField.setLocation(95,300);
 			charSetPanel.add(setCharJobTextField);
+			
+			saveUserDataBtn = new JButton("유저 정보 저장");
+			saveUserDataBtn.addActionListener(buttonActionListener);
+			saveUserDataBtn.setBounds(10,10,150,30);
+			charSetPanel.add(saveUserDataBtn);
+			
 			
 			setTitle("Set User Info");
 			setSize(400,400);
 			setLocationRelativeTo(null);
 			setResizable(false);
-			setVisible(true);
+			setVisible(false);
 			setLayout(null);
+			
 		}
+		
 
 	}
 	
 	
 }
-
-/*
- * try { JSONObject obj = userSetUtil.userSet("한국", "권광원", 28, "free", "it");
- * fileModuleUtil.saveUserData(obj); String k = obj.toString();
- * System.out.println(k); } catch (Exception e) { // TODO Auto-generated catch
- * block e.printStackTrace(); }
- */
