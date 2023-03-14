@@ -13,11 +13,20 @@ public class UserParser {
 
 	public static JSONObject parse(File fileList){
 		JSONParser parser = new JSONParser();
-		Reader reader = null;
+		StringBuilder sb = null;
 		JSONObject obj = null;
+		String str  = null;
+		String payload = null;
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileList), "UTF-8"));
-			obj = (JSONObject) parser.parse(br);
+			sb = new StringBuilder();
+			while((str = br.readLine()) !=null) {
+				sb.append(str);
+			}
+			br.close();
+			payload = sb.toString();
+			obj = (JSONObject) parser.parse(payload);
+			sb = sb != null ? null: null;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
