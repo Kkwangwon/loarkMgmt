@@ -264,8 +264,8 @@ public class LAM extends JFrame{
 		charClassLabel.setSize(200,30);
 		mainPanel.add(charClassLabel);
 		
-		charJobLabel = new JLabel("aa");
-		charJobLabel.setLocation(280,340);
+		charJobLabel = new JLabel("사진이 들어갈 예정");
+		charJobLabel.setLocation(20,220);
 		charJobLabel.setSize(200,30);
 		mainPanel.add(charJobLabel);
 		
