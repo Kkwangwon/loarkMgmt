@@ -102,18 +102,11 @@ public class FileModuleUtil {
 	}
 	
 	//load loa homework savefile
-	public static List<JSONObject> loadHomeWorkData(String charName) {
-		File dir = new File(BASE_DIR+"homeWorkInfo/"+charName);
-		File[] fileList = dir.listFiles();
-		JSONObject obj = null;
-		List<JSONObject> objList = new ArrayList<>();
-		if(dir.listFiles() !=null && dir.listFiles().length>0) {
-			for(int i = 0; i<fileList.length; i++) {
-				obj = UserParser.parse(fileList[i]);
-				objList.add(obj);
-			}
-		}
-		return objList;
+	public static JSONObject loadHomeWorkData(String charName) {
+		File dir = new File(BASE_DIR+"homeWorkInfo/"+charName+".json");
+		JSONObject obj = new JSONObject();
+		obj = UserParser.parse(dir);
+		return obj;
 	}
 	
 	public static void userDelete(String charName) {

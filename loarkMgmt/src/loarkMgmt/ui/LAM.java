@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Iterator;
@@ -129,23 +131,11 @@ public class LAM extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == loadUserDataBtn) {
-				charListModel = new DefaultListModel<String>();
 				List<JSONObject> objList = FileModuleUtil.loadUserData();
 				if(!objList.isEmpty()) {
-				String charInfo = null;
-				String charName = null;
-				String charServer = null;
-				for(JSONObject o : objList) {
-					charName =  ((JSONObject) ((JSONArray) o.get("characterInfo")).get(0)).get("name").toString();
-					charServer =  o.get("server").toString();
-					charInfo = charName+"<"+charServer+">";
-					charListModel.addElement(charInfo);
+				loadCharList(objList);
 				}
-				charList = new JList<String>(charListModel);
-				charList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				charListScrollPane.setViewportView(charList);
-				System.out.println("로딩 완료!");
-				}else {
+				else {
 					System.out.println("저장된 캐릭터 목록이 없습니다. 캐릭터를 생성하세요");
 					e.setSource(createUserPaneBtn);
 				}
@@ -178,18 +168,55 @@ public class LAM extends JFrame{
 		}
 	};
 	
+	private void loadCharList(List<JSONObject> objList) {
+		String charInfo = null;
+		String charName = null;
+		String charServer = null;
+		charListModel = new DefaultListModel<String>();
+		for(JSONObject o : objList) {
+			charName =  ((JSONObject) ((JSONArray) o.get("characterInfo")).get(0)).get("name").toString();
+			charServer =  o.get("server").toString();
+			charInfo = charName+"<"+charServer+">";
+			charListModel.addElement(charInfo);
+		}
+		charList = new JList<String>(charListModel);
+		charList.addMouseListener(new MouseAdapter() {
+			
+			
+			public void mouseCliked(MouseEvent e) {
+				if(e.getClickCount() == 1) {
+					selectCharList();
+				}
+			}	
+		
+		});
+		
+		charList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		charListScrollPane.setViewportView(charList);
+		System.out.println("로딩 완료!");
+		
+	}
+	
 	private void selectCharList() {
 		if(charList != null && charList.isSelectionEmpty()) {
 			String value = charList.getSelectedValue();
-			if(homeWorkList != null) {
-				homeWorkListModel = new DefaultListModel<>();
-				homeWorkList = new JList<Boolean>(homeWorkListModel);
-			}else {
-				System.out.println("숙제 정보가 없어요!!");
-			}
-			
+			String[] nameInfo = value.split("<");
+			String charName = nameInfo[0];
+			JSONObject obj = FileModuleUtil.loadHomeWorkData(charName);
+			homeWorkListModel = new DefaultListModel<>();
+			homeWorkList = new JList<Boolean>(homeWorkListModel);
+			 Boolean valtan = (Boolean) obj.get(valtan);
+			 Boolean biackiss = (Boolean) obj.get(biackiss);
+			 Boolean kouku_saton = (Boolean) obj.get(kouku_saton);
+			 Boolean abrelshud = (Boolean) obj.get(abrelshud);
+			 Boolean illiakan = (Boolean) obj.get(illiakan);
+			 Boolean abyssOfKayangel = (Boolean) obj.get(abyssOfKayangel);
+			 Boolean abyssOfVoldaik = (Boolean) obj.get(abyssOfVoldaik);
+			 Boolean challenge_guardian_conquest = (Boolean) obj.get(challenge_guardian_conquest);
+			 Boolean challenge_abyss_dungeon = (Boolean) obj.get(challenge_abyss_dungeon);
 		}
 	}
+	
 	
 	public LAM() throws Exception{
 		/*main Frame*/
