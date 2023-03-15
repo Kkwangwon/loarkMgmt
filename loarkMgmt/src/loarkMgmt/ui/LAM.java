@@ -143,9 +143,6 @@ public class LAM extends JFrame{
 			if(e.getSource() == createUserPaneBtn) {
 				try {
 					SetCharInfoFrame setCharInfoFrame = new SetCharInfoFrame();
-					if(!setCharInfoFrame.isFocused()) {
-						setCharInfoFrame.dispose();
-					}
 				} catch (Exception e1) {
 					System.out.println("캐릭터 저장창에 문제가 생겼어요. 관리자에게 문의해주세요");
 				} 
@@ -182,8 +179,8 @@ public class LAM extends JFrame{
 		charList = new JList<String>(charListModel);
 		charList.addMouseListener(new MouseAdapter() {
 			
-			
-			public void mouseCliked(MouseEvent e) {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount() == 1) {
 					selectCharList();
 				}
@@ -198,7 +195,6 @@ public class LAM extends JFrame{
 	}
 	
 	private void selectCharList() {
-		if(charList != null && charList.isSelectionEmpty()) {
 			String value = charList.getSelectedValue();
 			String[] nameInfo = value.split("<");
 			String charName = nameInfo[0];
@@ -214,7 +210,7 @@ public class LAM extends JFrame{
 			 Boolean abyssOfVoldaik = (Boolean) obj.get("abyssOfVoldaik");
 			 Boolean challenge_guardian_conquest = (Boolean) obj.get("challenge_guardian_conquest");
 			 Boolean challenge_abyss_dungeon = (Boolean) obj.get("challenge_abyss_dungeon");
-		}
+			 System.out.println(valtan);
 	}
 	
 	
