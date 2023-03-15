@@ -205,15 +205,15 @@ public class LAM extends JFrame{
 			JSONObject obj = FileModuleUtil.loadHomeWorkData(charName);
 			homeWorkListModel = new DefaultListModel<>();
 			homeWorkList = new JList<Boolean>(homeWorkListModel);
-			 Boolean valtan = (Boolean) obj.get(valtan);
-			 Boolean biackiss = (Boolean) obj.get(biackiss);
-			 Boolean kouku_saton = (Boolean) obj.get(kouku_saton);
-			 Boolean abrelshud = (Boolean) obj.get(abrelshud);
-			 Boolean illiakan = (Boolean) obj.get(illiakan);
-			 Boolean abyssOfKayangel = (Boolean) obj.get(abyssOfKayangel);
-			 Boolean abyssOfVoldaik = (Boolean) obj.get(abyssOfVoldaik);
-			 Boolean challenge_guardian_conquest = (Boolean) obj.get(challenge_guardian_conquest);
-			 Boolean challenge_abyss_dungeon = (Boolean) obj.get(challenge_abyss_dungeon);
+			 Boolean valtan = (Boolean) obj.get("valtan");
+			 Boolean biackiss = (Boolean) obj.get("biackiss");
+			 Boolean kouku_saton = (Boolean) obj.get("kouku_saton");
+			 Boolean abrelshud = (Boolean) obj.get("abrelshud");
+			 Boolean illiakan = (Boolean) obj.get("illiakan");
+			 Boolean abyssOfKayangel = (Boolean) obj.get("abyssOfKayangel");
+			 Boolean abyssOfVoldaik = (Boolean) obj.get("abyssOfVoldaik");
+			 Boolean challenge_guardian_conquest = (Boolean) obj.get("challenge_guardian_conquest");
+			 Boolean challenge_abyss_dungeon = (Boolean) obj.get("challenge_abyss_dungeon");
 		}
 	}
 	
