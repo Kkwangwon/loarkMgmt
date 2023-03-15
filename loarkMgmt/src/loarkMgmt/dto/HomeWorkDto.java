@@ -3,7 +3,10 @@ package loarkMgmt.dto;
 import org.json.simple.JSONObject;
 
 public class HomeWorkDto {
- private boolean valtan;
+ 
+ private String charName;
+
+private boolean valtan;
  private boolean biackiss;
  private boolean kouku_saton;
  private boolean abrelshud;
@@ -13,6 +16,12 @@ public class HomeWorkDto {
  private boolean challenge_guardian_conquest;
  private boolean challenge_abyss_dungeon;
  
+ public String getCharName() {
+	 return charName;
+}
+ public void setCharName(String charName) {
+	 this.charName = charName;
+}
  public boolean isValtan() {
 	return valtan;
 }

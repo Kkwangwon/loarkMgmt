@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -45,33 +46,45 @@ public class LAM extends JFrame{
 	private JButton loadUserDataBtn;
 	
 	private JButton saveUserDataBtn;
-	private JButton saveUserPaneBtn;
+	private JButton createUserPaneBtn;
 	
 	private JButton loadUserHomeWorkDataBtn;
 	private JButton saveUserHomeWorkDataBtn;
 	
+	private JButton deleteUserDataBtn;
+	
 	//DefaultListModel
 	private DefaultListModel<String> charListModel;
+	private DefaultListModel<Boolean> homeWorkListModel;
 	
 	
-	//JList
+	//iist
 	private JList<String> charList;
+	private JList<Boolean> homeWorkList;
 	
 	//textField
-	private JTextField serverTextField;
-	private JTextField nameTextField;
-	private JTextField levelTextField;
-	private JTextField charClassTextField;
-	private JTextField charJobTextField;
 	private JTextField setServerTextField;
 	private JTextField setNameTextField;
 	private JTextField setLevelTextField;
 	private JTextField setCharClassTextField;
 	private JTextField setCharJobTextField; 
 	
+	//label
+	private JLabel serverLabel;
+	private JLabel nameLabel;
+	private JLabel levelLabel;
+	private JLabel charClassLabel;
+	private JLabel charJobLabel;
+	private JLabel setServerLabel;
+	private JLabel setNameLabel;
+	private JLabel setLevelLabel;
+	private JLabel setCharClassLabel;
+	private JLabel setCharJobLabel; 
+	
 	//scrollPane
 	private JScrollPane charListScrollPane;
 	private JScrollPane homeWorkScrollPane;
+	private JScrollPane charInfoScrollPane;
 	private JScrollPane logScrollPane;
 	
 	//checkBox
@@ -125,43 +138,58 @@ public class LAM extends JFrame{
 				for(JSONObject o : objList) {
 					charName =  ((JSONObject) ((JSONArray) o.get("characterInfo")).get(0)).get("name").toString();
 					charServer =  o.get("server").toString();
-					charInfo = "<"+charServer+">    "+charName;
+					charInfo = charName+"<"+charServer+">";
 					charListModel.addElement(charInfo);
 				}
 				charList = new JList<String>(charListModel);
 				charList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				charListScrollPane.setViewportView(charList);
-				System.out.println("유저정보 로드 완료");
+				System.out.println("로딩 완료!");
 				}else {
-					System.out.println("유저 정보가 없습니다!");
+					System.out.println("저장된 캐릭터 목록이 없습니다. 캐릭터를 생성하세요");
+					e.setSource(createUserPaneBtn);
 				}
 			}
-			if(e.getSource() == saveUserPaneBtn) {
+			if(e.getSource() == createUserPaneBtn) {
 				try {
 					SetCharInfoFrame setCharInfoFrame = new SetCharInfoFrame();
-					setCharInfoFrame.setVisible(true);
+					if(!setCharInfoFrame.isFocused()) {
+						setCharInfoFrame.dispose();
+					}
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					System.out.println("캐릭터 저장창에 문제가 생겼어요. 관리자에게 문의해주세요");
 				} 
 			}
-			if(e.getSource()==saveUserDataBtn) {
-				String server = setServerTextField.getText();
-				String name = setNameTextField.getText();
-				int level = Integer.parseInt(setLevelTextField.getText());
-				String charClass = setCharClassTextField.getText();
-				String charJob = setCharJobTextField.getText();
-				JSONObject userObj = SetUtil.userSet(server, name, level, charClass, charJob);
-				try {
-					SetCharInfoFrame setCharInfoFrame = new SetCharInfoFrame();
-					FileModuleUtil.saveUserData(userObj);
-					System.out.println("유저정보 저장 완료!");
-				} catch (Exception e1) {
-					e1.printStackTrace();
-					System.out.println("유저정보 저장 실패 ㅠ.ㅠ");
+			
+			if(e.getSource()==deleteUserDataBtn) {
+				if(charList != null && !charList.isSelectionEmpty()) {
+					String value = charList.getSelectedValue();
+					int idx = charList.getSelectedIndex();
+					String[] nameInfo = value.split("<");
+					String charName = nameInfo[0];
+					FileModuleUtil.userDelete(charName);
+					charListModel.removeElementAt(idx);
+					System.out.println("삭제가 정상적으로 이루어졌습니다.");
+				}else{
+					System.out.println("삭제하고 싶은 캐릭터를 선택해 주세요");
 				}
+				 
 			}
 		}
 	};
+	
+	private void selectCharList() {
+		if(charList != null && charList.isSelectionEmpty()) {
+			String value = charList.getSelectedValue();
+			if(homeWorkList != null) {
+				homeWorkListModel = new DefaultListModel<>();
+				homeWorkList = new JList<Boolean>(homeWorkListModel);
+			}else {
+				System.out.println("숙제 정보가 없어요!!");
+			}
+			
+		}
+	}
 	
 	public LAM() throws Exception{
 		/*main Frame*/
@@ -192,24 +220,92 @@ public class LAM extends JFrame{
 		System.setOut(con);
 		System.setErr(con);
 		
-		saveUserPaneBtn = new JButton("유저 정보 설정");
-		saveUserPaneBtn.addActionListener(buttonActionListener);
-		saveUserPaneBtn.setBounds(10,400,150,30);
-		mainPanel.add(saveUserPaneBtn);
+		createUserPaneBtn = new JButton("유저 정보 설정");
+		createUserPaneBtn.addActionListener(buttonActionListener);
+		createUserPaneBtn.setBounds(10,400,150,30);
+		mainPanel.add(createUserPaneBtn);
 		
 		loadUserDataBtn = new JButton("유저 정보 로드");
 		loadUserDataBtn.addActionListener(buttonActionListener);
-		loadUserDataBtn.setBounds(361,400,150,30);
+		loadUserDataBtn.setBounds(185,400,150,30);
 		mainPanel.add(loadUserDataBtn);
+		
+		deleteUserDataBtn = new JButton("유저 정보 삭제");
+		deleteUserDataBtn.addActionListener(buttonActionListener);
+		deleteUserDataBtn.setBounds(361,400,150,30);
+		mainPanel.add(deleteUserDataBtn);
 		
 		charListScrollPane = new JScrollPane();
 		charListScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		charListScrollPane.setBounds(10,10,500,370);
+		charListScrollPane.setBounds(10,10,500,190);
 		mainPanel.add(charListScrollPane);
+
+		charInfoScrollPane = new JScrollPane();
+		charInfoScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		charInfoScrollPane.setBounds(10,180,500,210);
 		
-	}
+		serverLabel = new JLabel("aa");
+		serverLabel.setLocation(280,220);
+		serverLabel.setSize(200,30);
+		mainPanel.add(serverLabel);
+		
+		nameLabel = new JLabel("aa");
+		nameLabel.setLocation(280,250);
+		nameLabel.setSize(200,30);
+		mainPanel.add(nameLabel);
+		
+		levelLabel = new JLabel("aa");
+		levelLabel.setLocation(280,280);
+		levelLabel.setSize(200,30);
+		mainPanel.add(levelLabel);
+		
+		charClassLabel = new JLabel("aa");
+		charClassLabel.setLocation(280,310);
+		charClassLabel.setSize(200,30);
+		mainPanel.add(charClassLabel);
+		
+		charJobLabel = new JLabel("aa");
+		charJobLabel.setLocation(280,340);
+		charJobLabel.setSize(200,30);
+		mainPanel.add(charJobLabel);
+		
+		homeWorkScrollPane = new JScrollPane();
+		homeWorkScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		homeWorkScrollPane.setBounds(700,10,550,380);
+		mainPanel.add(homeWorkScrollPane);		
+		
+		loadUserHomeWorkDataBtn = new JButton(">>");
+		loadUserHomeWorkDataBtn.addActionListener(buttonActionListener);
+		loadUserHomeWorkDataBtn.setBounds(580, 190, 50, 50);
+		mainPanel.add(loadUserHomeWorkDataBtn);
+		
+		}
 	
 	class SetCharInfoFrame extends JFrame{
+		
+		public ActionListener userConfigButtonActionListener = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource()==saveUserDataBtn) {
+					try {
+					String server = setServerTextField.getText();
+					String name = setNameTextField.getText();
+					int level = Integer.parseInt(setLevelTextField.getText());
+					String charClass = setCharClassTextField.getText();
+					String charJob = setCharJobTextField.getText();
+					JSONObject userObj = SetUtil.userSet(server, name, level, charClass, charJob);
+					JSONObject defaultHwObj = SetUtil.createHomeWorkSet(name);
+					FileModuleUtil.createUserData(userObj,defaultHwObj);
+					dispose();
+						System.out.println("캐릭터정보 저장 완료!");
+					} catch (Exception e1) {
+						System.out.println("캐릭터정보 저장 실패 ㅠ.ㅠ  다시한번 확인해주세요");
+					}
+				}
+			}
+		};
+
 		public SetCharInfoFrame() throws Exception {
 			
 			/*charSet Pane*/
@@ -221,49 +317,75 @@ public class LAM extends JFrame{
 			setServerTextField = new JTextField();
 			setServerTextField.setText("");
 			setServerTextField.setColumns(12);
-			setServerTextField.setSize(200,30);
 			setServerTextField.setLocation(95,60);
+			setServerTextField.setSize(200,30);
 			charSetPanel.add(setServerTextField);
 			
 			setNameTextField = new JTextField();
 			setNameTextField.setText("");
 			setNameTextField.setColumns(12);
-			setNameTextField.setSize(200,30);
 			setNameTextField.setLocation(95,120);
+			setNameTextField.setSize(200,30);
 			charSetPanel.add(setNameTextField);
 			
 			setLevelTextField = new JTextField();
 			setLevelTextField.setText("");
 			setLevelTextField.setColumns(12);
-			setLevelTextField.setSize(200,30);
 			setLevelTextField.setLocation(95,180);
+			setLevelTextField.setSize(200,30);
 			charSetPanel.add(setLevelTextField);
 			
 			setCharClassTextField = new JTextField();
 			setCharClassTextField.setText("");
 			setCharClassTextField.setColumns(12);
-			setCharClassTextField.setSize(200,30);
 			setCharClassTextField.setLocation(95,240);
+			setCharClassTextField.setSize(200,30);
 			charSetPanel.add(setCharClassTextField);
 			
 			setCharJobTextField = new JTextField();
 			setCharJobTextField.setText("");
 			setCharJobTextField.setColumns(12);
-			setCharJobTextField.setSize(200,30);
 			setCharJobTextField.setLocation(95,300);
+			setCharJobTextField.setSize(200,30);
 			charSetPanel.add(setCharJobTextField);
 			
-			saveUserDataBtn = new JButton("유저 정보 저장");
-			saveUserDataBtn.addActionListener(buttonActionListener);
-			saveUserDataBtn.setBounds(10,10,150,30);
-			charSetPanel.add(saveUserDataBtn);
+			setServerLabel = new JLabel("서버 : ");
+			setServerLabel.setLocation(95,30);
+			setServerLabel.setSize(200,30);
+			charSetPanel.add(setServerLabel);
 			
+			setNameLabel = new JLabel("닉네임 : ");
+			setNameLabel.setLocation(95,90);
+			setNameLabel.setSize(200,30);
+			charSetPanel.add(setNameLabel);
+			
+			setLevelLabel = new JLabel("아이템레벨 : ");
+			setLevelLabel.setLocation(95,150);
+			setLevelLabel.setSize(200,30);
+			charSetPanel.add(setLevelLabel);
+			
+			setCharClassLabel = new JLabel("직업군 : ");
+			setCharClassLabel.setLocation(95,210);
+			setCharClassLabel.setSize(200,30);
+			charSetPanel.add(setCharClassLabel);
+			
+			setCharJobLabel = new JLabel("클래스명 : ");
+			setCharJobLabel.setLocation(95,270);
+			setCharJobLabel.setSize(200,30);
+			charSetPanel.add(setCharJobLabel);
+
+			saveUserDataBtn = new JButton("저장");
+			saveUserDataBtn.addActionListener(userConfigButtonActionListener);
+			saveUserDataBtn.setBounds(10,10,100,20);
+			charSetPanel.add(saveUserDataBtn);
 			
 			setTitle("Set User Info");
 			setSize(400,400);
+			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			setLocationRelativeTo(null);
+			setAlwaysOnTop(true);
 			setResizable(false);
-			setVisible(false);
+			setVisible(true);
 			setLayout(null);
 			
 		}

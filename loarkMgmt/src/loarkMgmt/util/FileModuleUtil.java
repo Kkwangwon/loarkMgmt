@@ -18,24 +18,34 @@ public class FileModuleUtil {
 	private static String BASE_DIR = "C://userConfig/";
 	
 	//make loa userdata savefile
-	public static void saveUserData(JSONObject obj) throws Exception {
+	public static void createUserData(JSONObject userObj, JSONObject hwObj) throws Exception {
 		try {
-			if(obj != null) {
-				String nameInfo = "nameInfo/" + ((JSONObject) ((JSONArray) obj.get("characterInfo")).get(0)).get("name").toString();
+			if(userObj != null) {
+				String nameInfo = "nameInfo/" + ((JSONObject) ((JSONArray) userObj.get("characterInfo")).get(0)).get("name").toString();
+				String homeWorkInfo = "homeWorkInfo/" + ((JSONObject) ((JSONArray) userObj.get("characterInfo")).get(0)).get("name").toString();
 				
-				File file = new File(BASE_DIR+nameInfo+".json");
+				File file1 = new File(BASE_DIR+nameInfo+".json");
+				File file2 = new File(BASE_DIR+homeWorkInfo+".json");
 				
-				file.mkdirs();
-				
-				if(file.exists()) {
-					file.delete();
+				file1.mkdirs();
+				file2.mkdirs();
+				if(file1.exists()) {
+					file1.delete();
 				}
-				file.createNewFile();
-		
-				BufferedWriter writer  = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.getAbsolutePath()), "MS949"));
-				String user = obj.toJSONString();
-				writer.write(user);
-				writer.close();
+				if(file2.exists()) {
+					file2.delete();
+				}
+				file1.createNewFile();
+				file2.createNewFile();
+				
+				BufferedWriter writer1  = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file1.getAbsolutePath()), "MS949"));
+				BufferedWriter writer2  = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file2.getAbsolutePath()), "MS949"));
+				String user = userObj.toJSONString();
+				String homeWork = hwObj.toJSONString();
+				writer1.write(user);
+				writer2.write(homeWork);
+				writer1.close();
+				writer2.close();
 				
 			}else {
 				throw new Exception();
