@@ -134,8 +134,7 @@ public class LAM extends JFrame{
 				List<JSONObject> objList = FileModuleUtil.loadUserData();
 				if(!objList.isEmpty()) {
 				loadCharList(objList);
-				}
-				else {
+				}else{
 					System.out.println("저장된 캐릭터 목록이 없습니다. 캐릭터를 생성하세요");
 					e.setSource(createUserPaneBtn);
 				}
