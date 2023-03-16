@@ -21,8 +21,8 @@ public class FileModuleUtil {
 	public static void createUserData(JSONObject userObj, JSONObject hwObj) throws Exception {
 		try {
 			if(userObj != null) {
-				String nameInfo = "nameInfo/" + ((JSONObject) ((JSONArray) userObj.get("characterInfo")).get(0)).get("name").toString();
-				String homeWorkInfo = "homeWorkInfo/" + ((JSONObject) ((JSONArray) userObj.get("characterInfo")).get(0)).get("name").toString();
+				String nameInfo = "nameInfo/" + userObj.get("name").toString();
+				String homeWorkInfo = "homeWorkInfo/" + userObj.get("name").toString();
 				
 				File file1 = new File(BASE_DIR+nameInfo+".json");
 				File file2 = new File(BASE_DIR+homeWorkInfo+".json");
@@ -70,7 +70,14 @@ public class FileModuleUtil {
 		}
 		return objList;
 	}
-	
+
+	//only one userinfomation load
+	public static JSONObject loadCharData(String charName) {
+		File dir = new File(BASE_DIR+"nameInfo/"+charName+".json");
+		JSONObject obj = new JSONObject();
+		obj = UserParser.parse(dir);
+		return obj;
+	}
 	
 	//make loa homework savefile
 	public static void saveHomeWorkData(String charName, JSONObject homeWorkObj) throws Exception {
@@ -108,6 +115,7 @@ public class FileModuleUtil {
 		obj = UserParser.parse(dir);
 		return obj;
 	}
+	
 	
 	public static void userDelete(String charName) {
 		File file1 = new File(BASE_DIR+"nameInfo/"+charName+".json");

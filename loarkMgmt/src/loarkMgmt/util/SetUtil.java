@@ -7,7 +7,7 @@ import loarkMgmt.dto.UserDto;
 
 public class SetUtil {
 	
-	public static JSONObject userSet(String server, String name, int level, String charClass, String charJob) {
+	public static JSONObject userSet(String server, String name, int level, String charClass, String charJob){
 		UserDto ud = new UserDto();
 		ud.setServer(server);
 		ud.setName(name);
@@ -16,11 +16,10 @@ public class SetUtil {
 		ud.setCharJob(charJob);
 		
 		JSONObject obj = ud.toJson();
-		
 		return obj;
 	}
 	
-	public static JSONObject homeWorkSet(String charName, boolean valtan, boolean biackiss, boolean kouku_saton, boolean abrelshud,boolean illiakan, boolean abyssOfKayangel, boolean abyssOfVoldaik, boolean challenge_guardian_conquest, boolean challenge_abyss_dungeon) {
+	public static JSONObject homeWorkSet(String charName, String valtan, String biackiss, String kouku_saton, String abrelshud,String illiakan, String abyssOfKayangel, String abyssOfVoldaik, String challenge_guardian_conquest, String challenge_abyss_dungeon) {
 		HomeWorkDto hwd = new HomeWorkDto();
 		
 		hwd.setCharName(charName);
@@ -42,15 +41,15 @@ public class SetUtil {
 		HomeWorkDto hwd = new HomeWorkDto();
 		
 		hwd.setCharName(charName);
-		hwd.setValtan(false);
-		hwd.setBiackiss(false);
-		hwd.setKouku_saton(false);
-		hwd.setAbrelshud(false);
-		hwd.setIlliakan(false);
-		hwd.setAbyssOfKayangel(false);
-		hwd.setAbyssOfVoldaik(false);
-		hwd.setChallenge_guardian_conquest(false);
-		hwd.setChallenge_abyss_dungeon(false);
+		hwd.setValtan("false");
+		hwd.setBiackiss("false");
+		hwd.setKouku_saton("false");
+		hwd.setAbrelshud("false");
+		hwd.setIlliakan("false");
+		hwd.setAbyssOfKayangel("false");
+		hwd.setAbyssOfVoldaik("false");
+		hwd.setChallenge_guardian_conquest("false");
+		hwd.setChallenge_abyss_dungeon("false");
 		
 		JSONObject obj = hwd.toJson();
 		

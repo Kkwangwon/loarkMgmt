@@ -1,17 +1,20 @@
 package loarkMgmt.ui;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
@@ -31,8 +34,10 @@ import javax.swing.border.EtchedBorder;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
+import loarkMgmt.dto.UserDto;
 import loarkMgmt.ui.LAM.SetCharInfoFrame;
 import loarkMgmt.util.FileModuleUtil;
+import loarkMgmt.util.FormUtil;
 import loarkMgmt.util.SetUtil;
 import loarkMgmt.util.TextAreaOutputStream;
 
@@ -45,20 +50,25 @@ public class LAM extends JFrame{
 	private JPanel charSetPanel;
 	
 	//button
-	private JButton loadUserDataBtn;
+	private JButton valtanButton;
+	private JButton biackissButton;
+	private JButton kouku_satonButton;
+	private JButton abrelshudButton;
+	private JButton illiakanButton;
+	private JButton abyssOfKayangelButton;
+	private JButton abyssOfVoldaikButton;
+	private JButton challenge_guardian_conquestButton;
+	private JButton challenge_abyss_dungeonButton;
 	
+	private JButton loadUserDataBtn;
 	private JButton saveUserDataBtn;
 	private JButton createUserPaneBtn;
-	
-	private JButton loadUserHomeWorkDataBtn;
 	private JButton saveUserHomeWorkDataBtn;
-	
 	private JButton deleteUserDataBtn;
 	
 	//DefaultListModel
 	private DefaultListModel<String> charListModel;
 	private DefaultListModel<Boolean> homeWorkListModel;
-	
 	
 	//iist
 	private JList<String> charList;
@@ -72,36 +82,25 @@ public class LAM extends JFrame{
 	private JTextField setCharJobTextField; 
 	
 	//label
-	private JLabel serverLabel;
-	private JLabel nameLabel;
-	private JLabel levelLabel;
-	private JLabel charClassLabel;
-	private JLabel charJobLabel;
 	private JLabel setServerLabel;
 	private JLabel setNameLabel;
 	private JLabel setLevelLabel;
 	private JLabel setCharClassLabel;
 	private JLabel setCharJobLabel; 
+	private JLabel lostArkMark;
 	
 	//scrollPane
 	private JScrollPane charListScrollPane;
-	private JScrollPane homeWorkScrollPane;
 	private JScrollPane charInfoScrollPane;
 	private JScrollPane logScrollPane;
+	private JScrollPane charImageScrollPane;
 	
-	//checkBox
-	private JCheckBox valtan;
-	private JCheckBox biackiss;
-	private JCheckBox kouku_saton;
-	private JCheckBox abrelshud;
-	private JCheckBox illiakan;
-	private JCheckBox abyssOfKayangel;
-	private JCheckBox abyssOfVoldaik;
-	private JCheckBox challenge_guardian_conquest;
-	private JCheckBox challenge_abyss_dungeon;
 	
 	//TextArea
 	private JTextArea logTextArea;
+	private JTextArea charInfoTextArea;
+	
+
 
 	public static void main(String[] args){
 		EventQueue.invokeLater(new Runnable() {
@@ -130,6 +129,7 @@ public class LAM extends JFrame{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
 			if(e.getSource() == loadUserDataBtn) {
 				List<JSONObject> objList = FileModuleUtil.loadUserData();
 				if(!objList.isEmpty()) {
@@ -156,14 +156,133 @@ public class LAM extends JFrame{
 					String charName = nameInfo[0];
 					FileModuleUtil.userDelete(charName);
 					charListModel.removeElementAt(idx);
+					charListScrollPane.requestFocus(true);
 					System.out.println("삭제가 정상적으로 이루어졌습니다.");
+					setHomeWorkButtonfalse();
 				}else{
 					System.out.println("삭제하고 싶은 캐릭터를 선택해 주세요");
 				}
 				 
 			}
+			if(e.getSource()==valtanButton) {
+				String value = valtanButton.getText();
+				if(value.equals("false")) {
+					valtanButton.setText("true");
+				}else {
+					valtanButton.setText("false");
+				}
+				saveHomeWorkData();
+			}
+			if(e.getSource()==biackissButton) {
+				String value = biackissButton.getText();
+				if(value.equals("false")) {
+					biackissButton.setText("true");
+				}else {
+					biackissButton.setText("false");
+				}
+				saveHomeWorkData();
+			}
+			if(e.getSource()==kouku_satonButton) {
+				String value = kouku_satonButton.getText();
+				if(value.equals("false")) {
+					kouku_satonButton.setText("true");
+				}else {
+					kouku_satonButton.setText("false");
+				}
+				saveHomeWorkData();
+			}
+			if(e.getSource()==abrelshudButton) {
+				String value = abrelshudButton.getText();
+				if(value.equals("false")) {
+					abrelshudButton.setText("true");
+				}else {
+					abrelshudButton.setText("false");
+				}
+				saveHomeWorkData();
+			}
+			if(e.getSource()==illiakanButton) {
+				String value = illiakanButton.getText();
+				if(value.equals("false")) {
+					illiakanButton.setText("true");
+				}else {
+					illiakanButton.setText("false");
+				}
+				saveHomeWorkData();
+			}
+			if(e.getSource()==abyssOfKayangelButton) {
+				String value = abyssOfKayangelButton.getText();
+				if(value.equals("false")) {
+					abyssOfKayangelButton.setText("true");
+				}else {
+					abyssOfKayangelButton.setText("false");
+				}
+				saveHomeWorkData();
+			}
+			if(e.getSource()==abyssOfVoldaikButton) {
+				String value = abyssOfVoldaikButton.getText();
+				if(value.equals("false")) {
+					abyssOfVoldaikButton.setText("true");
+				}else {
+					abyssOfVoldaikButton.setText("false");
+				}
+				saveHomeWorkData();
+			}
+			if(e.getSource()==challenge_guardian_conquestButton) {
+				String value = challenge_guardian_conquestButton.getText();
+				if(value.equals("false")) {
+					challenge_guardian_conquestButton.setText("true");
+				}else {
+					challenge_guardian_conquestButton.setText("false");
+				}
+				saveHomeWorkData();
+			}
+			if(e.getSource()==challenge_abyss_dungeonButton) {
+				String value = challenge_abyss_dungeonButton.getText();
+				if(value.equals("false")) {
+					challenge_abyss_dungeonButton.setText("true");
+				}else {
+					challenge_abyss_dungeonButton.setText("false");
+				}
+				saveHomeWorkData();
+			}
 		}
+
 	};
+	
+	private void saveHomeWorkData() {
+		
+		String value = charList.getSelectedValue();
+		String[] nameInfo = value.split("<");
+		String charName = nameInfo[0];
+		String valtan = valtanButton.getText();
+		String biackiss = biackissButton.getText();
+		String kouku_saton = kouku_satonButton.getText();
+		String abrelshud = abrelshudButton.getText();
+		String illiakan = illiakanButton.getText();
+		String abyssOfKayangel = abyssOfKayangelButton.getText();
+		String abyssOfVoldaik = abyssOfVoldaikButton.getText();
+		String challenge_guardian_conquest = challenge_guardian_conquestButton.getText();
+		String challenge_abyss_dungeon = challenge_abyss_dungeonButton.getText();
+		
+		JSONObject homeWorkObj = SetUtil.homeWorkSet(charName, valtan, biackiss, kouku_saton, abrelshud, illiakan, abyssOfKayangel, abyssOfVoldaik, challenge_guardian_conquest, challenge_abyss_dungeon);
+		try {
+			FileModuleUtil.saveHomeWorkData(charName, homeWorkObj);
+		} catch (Exception e) {
+			System.out.println("숙제 정보가 저장이 안됬어요 ㅠㅠ 관리자에게 물어봐야해요");
+		}
+	}
+	
+	private void tranceformIcon(JButton button) {
+		
+		ImageIcon trueIcon = new ImageIcon("");
+		ImageIcon falseIcon = new ImageIcon("");
+		String value = button.getText();
+		if(value == "true") {
+			button.setIcon(trueIcon);
+		}else {
+			button.setIcon(falseIcon);
+		}
+	}
 	
 	private void loadCharList(List<JSONObject> objList) {
 		String charInfo = null;
@@ -171,7 +290,7 @@ public class LAM extends JFrame{
 		String charServer = null;
 		charListModel = new DefaultListModel<String>();
 		for(JSONObject o : objList) {
-			charName =  ((JSONObject) ((JSONArray) o.get("characterInfo")).get(0)).get("name").toString();
+			charName =  o.get("name").toString();
 			charServer =  o.get("server").toString();
 			charInfo = charName+"<"+charServer+">";
 			charListModel.addElement(charInfo);
@@ -184,35 +303,80 @@ public class LAM extends JFrame{
 				if(e.getClickCount() == 1) {
 					selectCharList();
 				}
-			}	
+			}
 		
 		});
-		
+
 		charList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		charList.setFocusable(true);
 		charListScrollPane.setViewportView(charList);
+		charListScrollPane.setVisible(true);
+
 		System.out.println("로딩 완료!");
+		setHomeWorkButtonfalse();
 		
 	}
 	
 	private void selectCharList() {
+		
 			String value = charList.getSelectedValue();
 			String[] nameInfo = value.split("<");
 			String charName = nameInfo[0];
-			JSONObject obj = FileModuleUtil.loadHomeWorkData(charName);
-			homeWorkListModel = new DefaultListModel<>();
-			homeWorkList = new JList<Boolean>(homeWorkListModel);
-			 Boolean valtan = (Boolean) obj.get("valtan");
-			 Boolean biackiss = (Boolean) obj.get("biackiss");
-			 Boolean kouku_saton = (Boolean) obj.get("kouku_saton");
-			 Boolean abrelshud = (Boolean) obj.get("abrelshud");
-			 Boolean illiakan = (Boolean) obj.get("illiakan");
-			 Boolean abyssOfKayangel = (Boolean) obj.get("abyssOfKayangel");
-			 Boolean abyssOfVoldaik = (Boolean) obj.get("abyssOfVoldaik");
-			 Boolean challenge_guardian_conquest = (Boolean) obj.get("challenge_guardian_conquest");
-			 Boolean challenge_abyss_dungeon = (Boolean) obj.get("challenge_abyss_dungeon");
-			 System.out.println(valtan);
+			JSONObject hObj = FileModuleUtil.loadHomeWorkData(charName);
+			JSONObject obj = FileModuleUtil.loadCharData(charName);
+			String insert = FormUtil.jsonToTextareaForm(obj, UserDto.userKey);
+			charImageScrollPane.setVisible(true);
+			charInfoScrollPane.setVisible(true);
+			charInfoTextArea.setText(insert);
+			
+			String valtan = hObj.get("valtan").toString();
+			String biackiss =  hObj.get("biackiss").toString();
+			String kouku_saton =  hObj.get("kouku_saton").toString();
+			String abrelshud =  hObj.get("abrelshud").toString();
+			String illiakan =  hObj.get("illiakan").toString();
+			String abyssOfKayangel =  hObj.get("abyssOfKayangel").toString();
+			String abyssOfVoldaik =  hObj.get("abyssOfVoldaik").toString();
+			String challenge_guardian_conquest =  hObj.get("challenge_guardian_conquest").toString();
+			String challenge_abyss_dungeon =  hObj.get("challenge_abyss_dungeon").toString();
+			
+			valtanButton.setText(valtan);
+			biackissButton.setText(biackiss);
+			kouku_satonButton.setText(kouku_saton);
+			abrelshudButton.setText(abrelshud);
+			illiakanButton.setText(illiakan);
+			abyssOfKayangelButton.setText(abyssOfKayangel);
+			abyssOfVoldaikButton.setText(abyssOfVoldaik);
+			challenge_guardian_conquestButton.setText(challenge_guardian_conquest);
+			challenge_abyss_dungeonButton.setText(challenge_abyss_dungeon);
+			
+			setHomeWorkButtonTrue();
+
 	}
 	
+	private void setHomeWorkButtonTrue() {
+		valtanButton.setEnabled(true);
+		biackissButton.setEnabled(true);
+		kouku_satonButton.setEnabled(true);
+		abrelshudButton.setEnabled(true);
+		illiakanButton.setEnabled(true);
+		abyssOfKayangelButton.setEnabled(true);
+		abyssOfVoldaikButton.setEnabled(true);
+		challenge_guardian_conquestButton.setEnabled(true);
+		challenge_abyss_dungeonButton.setEnabled(true);
+	}
+	
+	private void setHomeWorkButtonfalse() {
+		valtanButton.setEnabled(false);
+		biackissButton.setEnabled(false);
+		kouku_satonButton.setEnabled(false);
+		abrelshudButton.setEnabled(false);
+		illiakanButton.setEnabled(false);
+		abyssOfKayangelButton.setEnabled(false);
+		abyssOfVoldaikButton.setEnabled(false);
+		challenge_guardian_conquestButton.setEnabled(false);
+		challenge_abyss_dungeonButton.setEnabled(false);
+	}
+
 	
 	public LAM() throws Exception{
 		/*main Frame*/
@@ -231,7 +395,7 @@ public class LAM extends JFrame{
 		
 		/*logScrollPane*/
 		logScrollPane = new JScrollPane();
-		logScrollPane.setBounds(12,449,1240,125);
+		logScrollPane.setBounds(12,509,1240,80);
 		mainPanel.add(logScrollPane);
 		logTextArea = new JTextArea();
 		logScrollPane.setViewportView(logTextArea);
@@ -245,62 +409,101 @@ public class LAM extends JFrame{
 		
 		createUserPaneBtn = new JButton("유저 정보 설정");
 		createUserPaneBtn.addActionListener(buttonActionListener);
-		createUserPaneBtn.setBounds(10,400,150,30);
+		createUserPaneBtn.setBounds(10,450,150,30);
 		mainPanel.add(createUserPaneBtn);
 		
 		loadUserDataBtn = new JButton("유저 정보 로드");
 		loadUserDataBtn.addActionListener(buttonActionListener);
-		loadUserDataBtn.setBounds(185,400,150,30);
+		loadUserDataBtn.setBounds(185,450,150,30);
 		mainPanel.add(loadUserDataBtn);
 		
 		deleteUserDataBtn = new JButton("유저 정보 삭제");
 		deleteUserDataBtn.addActionListener(buttonActionListener);
-		deleteUserDataBtn.setBounds(361,400,150,30);
+		deleteUserDataBtn.setBounds(361,450,150,30);
 		mainPanel.add(deleteUserDataBtn);
 		
 		charListScrollPane = new JScrollPane();
 		charListScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		charListScrollPane.setBounds(10,10,500,190);
+		charListScrollPane.setVisible(false);
 		mainPanel.add(charListScrollPane);
 
+		charImageScrollPane = new JScrollPane();
+		charImageScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		charImageScrollPane.setBounds(10,203,240,190);
+		charImageScrollPane.setVisible(false);
+		mainPanel.add(charImageScrollPane);
+		
 		charInfoScrollPane = new JScrollPane();
 		charInfoScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		charInfoScrollPane.setBounds(10,180,500,210);
+		charInfoScrollPane.setBounds(270,203,240,190);
+		mainPanel.add(charInfoScrollPane);
+		charInfoTextArea = new JTextArea();
+		charInfoScrollPane.setViewportView(charInfoTextArea);
+		charInfoScrollPane.setVisible(false);
+		charInfoTextArea.setEditable(false);
+		charInfoTextArea.setLineWrap(true);
+		charInfoTextArea.setWrapStyleWord(true);
 		
-		serverLabel = new JLabel("aa");
-		serverLabel.setLocation(280,220);
-		serverLabel.setSize(200,30);
-		mainPanel.add(serverLabel);
+		valtanButton = new JButton("false");
+		valtanButton.setBounds(700,10,150,150);
+		valtanButton.setEnabled(false);
+		valtanButton.addActionListener(buttonActionListener);
+		mainPanel.add(valtanButton);
 		
-		nameLabel = new JLabel("aa");
-		nameLabel.setLocation(280,250);
-		nameLabel.setSize(200,30);
-		mainPanel.add(nameLabel);
+		biackissButton = new JButton("false");
+		biackissButton.setBounds(900,10,150,150);
+		biackissButton.setEnabled(false);
+		biackissButton.addActionListener(buttonActionListener);
+		mainPanel.add(biackissButton);
 		
-		levelLabel = new JLabel("aa");
-		levelLabel.setLocation(280,280);
-		levelLabel.setSize(200,30);
-		mainPanel.add(levelLabel);
+		kouku_satonButton = new JButton("false");
+		kouku_satonButton.setBounds(1100,10,150,150);
+		kouku_satonButton.setEnabled(false);
+		kouku_satonButton.addActionListener(buttonActionListener);
+		mainPanel.add(kouku_satonButton);
 		
-		charClassLabel = new JLabel("aa");
-		charClassLabel.setLocation(280,310);
-		charClassLabel.setSize(200,30);
-		mainPanel.add(charClassLabel);
+		abrelshudButton = new JButton("false");
+		abrelshudButton.setBounds(700,170,150,150);
+		abrelshudButton.setEnabled(false);
+		abrelshudButton.addActionListener(buttonActionListener);
+		mainPanel.add(abrelshudButton);
 		
-		charJobLabel = new JLabel("사진이 들어갈 예정");
-		charJobLabel.setLocation(20,220);
-		charJobLabel.setSize(200,30);
-		mainPanel.add(charJobLabel);
+		illiakanButton = new JButton("false");
+		illiakanButton.setBounds(900,170,150,150);
+		illiakanButton.setEnabled(false);
+		illiakanButton.addActionListener(buttonActionListener);
+		mainPanel.add(illiakanButton);
 		
-		homeWorkScrollPane = new JScrollPane();
-		homeWorkScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		homeWorkScrollPane.setBounds(700,10,550,380);
-		mainPanel.add(homeWorkScrollPane);		
+		abyssOfKayangelButton = new JButton("false");
+		abyssOfKayangelButton.setBounds(1100,170,150,150);
+		abyssOfKayangelButton.setEnabled(false);
+		abyssOfKayangelButton.addActionListener(buttonActionListener);
+		mainPanel.add(abyssOfKayangelButton);
 		
-		loadUserHomeWorkDataBtn = new JButton(">>");
-		loadUserHomeWorkDataBtn.addActionListener(buttonActionListener);
-		loadUserHomeWorkDataBtn.setBounds(580, 190, 50, 50);
-		mainPanel.add(loadUserHomeWorkDataBtn);
+		abyssOfVoldaikButton = new JButton("false");
+		abyssOfVoldaikButton.setBounds(700,330,150,150);
+		abyssOfVoldaikButton.setEnabled(false);
+		abyssOfVoldaikButton.addActionListener(buttonActionListener);
+		mainPanel.add(abyssOfVoldaikButton);
+		
+		challenge_guardian_conquestButton = new JButton("false");
+		challenge_guardian_conquestButton.setBounds(900,330,150,150);
+		challenge_guardian_conquestButton.setEnabled(false);
+		challenge_guardian_conquestButton.addActionListener(buttonActionListener);
+		mainPanel.add(challenge_guardian_conquestButton);
+		
+		challenge_abyss_dungeonButton = new JButton("false");
+		challenge_abyss_dungeonButton.setBounds(1100,330,150,150);
+		challenge_abyss_dungeonButton.setEnabled(false);
+		challenge_abyss_dungeonButton.addActionListener(buttonActionListener);
+		mainPanel.add(challenge_abyss_dungeonButton);
+		
+		lostArkMark = new JLabel("LostArk마크가 들어갈 예정");
+		lostArkMark.setBounds(530, 190, 150, 50);
+		lostArkMark.setOpaque(true);
+		lostArkMark.setBackground(Color.CYAN);
+		mainPanel.add(lostArkMark);
 		
 		}
 	
@@ -317,13 +520,19 @@ public class LAM extends JFrame{
 					int level = Integer.parseInt(setLevelTextField.getText());
 					String charClass = setCharClassTextField.getText();
 					String charJob = setCharJobTextField.getText();
-					JSONObject userObj = SetUtil.userSet(server, name, level, charClass, charJob);
+					JSONObject userObj;
+					userObj = SetUtil.userSet(server, name, level, charClass, charJob);
 					JSONObject defaultHwObj = SetUtil.createHomeWorkSet(name);
 					FileModuleUtil.createUserData(userObj,defaultHwObj);
 					dispose();
+					List<JSONObject> objList = FileModuleUtil.loadUserData();
+					if(!objList.isEmpty()) {
+					loadCharList(objList);
+					}
 						System.out.println("캐릭터정보 저장 완료!");
+						setHomeWorkButtonfalse();
 					} catch (Exception e1) {
-						System.out.println("캐릭터정보 저장 실패 ㅠ.ㅠ  다시한번 확인해주세요");
+						System.out.println("캐릭터정보 저장 실패 ㅠ.ㅠ  값을 다시 한번 확인해주세요");
 					}
 				}
 			}

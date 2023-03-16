@@ -4,17 +4,19 @@ import org.json.simple.JSONObject;
 
 public class HomeWorkDto {
  
+	//keySet
+ public static String[] homeWorkKey = {"valtan","biackiss","kouku_saton","abrelshud","illiakan","abyssOfKayangel","abyssOfVoldaik","challenge_guardian_conquest","challenge_abyss_dungeon"};
+	
  private String charName;
-
-private boolean valtan;
- private boolean biackiss;
- private boolean kouku_saton;
- private boolean abrelshud;
- private boolean illiakan;
- private boolean abyssOfKayangel;
- private boolean abyssOfVoldaik;
- private boolean challenge_guardian_conquest;
- private boolean challenge_abyss_dungeon;
+ private String valtan;
+ private String biackiss;
+ private String kouku_saton;
+ private String abrelshud;
+ private String illiakan;
+ private String abyssOfKayangel;
+ private String abyssOfVoldaik;
+ private String challenge_guardian_conquest;
+ private String challenge_abyss_dungeon;
  
  public String getCharName() {
 	 return charName;
@@ -22,58 +24,58 @@ private boolean valtan;
  public void setCharName(String charName) {
 	 this.charName = charName;
 }
- public boolean isValtan() {
+ public String isValtan() {
 	return valtan;
 }
-public void setValtan(boolean valtan) {
+public void setValtan(String valtan) {
 	this.valtan = valtan;
 }
-public boolean isBiackiss() {
+public String isBiackiss() {
 	return biackiss;
 }
-public void setBiackiss(boolean biackiss) {
+public void setBiackiss(String biackiss) {
 	this.biackiss = biackiss;
 }
-public boolean isKouku_saton() {
+public String isKouku_saton() {
 	return kouku_saton;
 }
-public void setKouku_saton(boolean kouku_saton) {
+public void setKouku_saton(String kouku_saton) {
 	this.kouku_saton = kouku_saton;
 }
-public boolean isAbrelshud() {
+public String isAbrelshud() {
 	return abrelshud;
 }
-public void setAbrelshud(boolean abrelshud) {
+public void setAbrelshud(String abrelshud) {
 	this.abrelshud = abrelshud;
 }
-public boolean isIlliakan() {
+public String isIlliakan() {
 	return illiakan;
 }
-public void setIlliakan(boolean illiakan) {
+public void setIlliakan(String illiakan) {
 	this.illiakan = illiakan;
 }
-public boolean isAbyssOfKayangel() {
+public String isAbyssOfKayangel() {
 	return abyssOfKayangel;
 }
-public void setAbyssOfKayangel(boolean abyssOfKayangel) {
+public void setAbyssOfKayangel(String abyssOfKayangel) {
 	this.abyssOfKayangel = abyssOfKayangel;
 }
-public boolean isAbyssOfVoldaik() {
+public String isAbyssOfVoldaik() {
 	return abyssOfVoldaik;
 }
-public void setAbyssOfVoldaik(boolean abyssOfVoldaik) {
+public void setAbyssOfVoldaik(String abyssOfVoldaik) {
 	this.abyssOfVoldaik = abyssOfVoldaik;
 }
-public boolean isChallenge_guardian_conquest() {
+public String isChallenge_guardian_conquest() {
 	return challenge_guardian_conquest;
 }
-public void setChallenge_guardian_conquest(boolean challenge_guardian_conquest) {
+public void setChallenge_guardian_conquest(String challenge_guardian_conquest) {
 	this.challenge_guardian_conquest = challenge_guardian_conquest;
 }
-public boolean isChallenge_abyss_dungeon() {
+public String isChallenge_abyss_dungeon() {
 	return challenge_abyss_dungeon;
 }
-public void setChallenge_abyss_dungeon(boolean challenge_abyss_dungeon) {
+public void setChallenge_abyss_dungeon(String challenge_abyss_dungeon) {
 	this.challenge_abyss_dungeon = challenge_abyss_dungeon;
 }
 

@@ -4,12 +4,22 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class UserDto {
+	
+	//keySet
+	public static String[] userKey = {"server","name","level","charClass","charJob"};
+	
+	private String server;
 	private String name;
 	private int level;
 	private String charClass;
 	private String charJob;
-	private String server;
 	
+	public String getServer() {
+		return server;
+	}
+	public void setServer(String server) {
+		this.server = server;
+	}
 	public String getName() {
 		return name;
 	}
@@ -34,27 +44,15 @@ public class UserDto {
 	public void setCharJob(String charJob) {
 		this.charJob = charJob;
 	}
-	public String getServer() {
-		return server;
-	}
-	public void setServer(String server) {
-		this.server = server;
-	}
 	
 	public JSONObject toJson() {
 		
-		JSONObject sobj = new JSONObject();
-		sobj.put("name",name);
-		sobj.put("level", level);
-		sobj.put("charClass", charClass);
-		sobj.put("charJob", charJob);
-		
-		JSONArray arr = new JSONArray();
-		arr.add(sobj);
-		
 		JSONObject obj = new JSONObject();
 		obj.put("server",server);
-		obj.put("characterInfo", arr);
+		obj.put("name",name);
+		obj.put("level", level);
+		obj.put("charClass", charClass);
+		obj.put("charJob", charJob);
 		
 		return obj;
 		
