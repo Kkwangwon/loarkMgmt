@@ -87,6 +87,16 @@ public class LAM extends JFrame{
 	private JLabel setCharJobLabel; 
 	private JLabel lostArkMark;
 	
+	private JLabel valtanLabel;
+	private JLabel biackissLabel;
+	private JLabel kouku_satonLabel;
+	private JLabel abrelshudLabel;
+	private JLabel illiakanLabel;
+	private JLabel abyssOfKayangelLabel;
+	private JLabel abyssOfVoldaikLabel;
+	private JLabel challenge_guardian_conquestLabel;
+	private JLabel challenge_abyss_dungeonLabel;
+	
 	//scrollPane
 	private JScrollPane charListScrollPane;
 	private JScrollPane charInfoScrollPane;
@@ -304,15 +314,15 @@ public class LAM extends JFrame{
 		}
 	}
 	
-	private void tranceformIcon(JButton button) {
+	private void tranceformIcon(JButton button, JLabel label) {
 		
-		ImageIcon trueIcon = new ImageIcon("");
-		ImageIcon falseIcon = new ImageIcon("");
+		ImageIcon trueIcon = new ImageIcon("resource/true.png");
+		ImageIcon falseIcon = new ImageIcon("resource/true.png");
 		String value = button.getText();
 		if(value == "true") {
-			button.setIcon(trueIcon);
+			label.setIcon(trueIcon);
 		}else {
-			button.setIcon(falseIcon);
+			label.setIcon(falseIcon);
 		}
 	}
 	
@@ -508,7 +518,7 @@ public class LAM extends JFrame{
 		illiakanButton = new JButton("false");
 		illiakanButton.setBounds(900,170,150,150);
 		illiakanButton.setEnabled(false);
-		illiakanButton.setFont(new Font("Serif",Font.BOLD,0));
+		illiakanButton.setFont(new Font("Serif",Font.BOLD,28));
 		illiakanButton.addActionListener(buttonActionListener);
 		mainPanel.add(illiakanButton);
 		
@@ -539,6 +549,52 @@ public class LAM extends JFrame{
 		challenge_abyss_dungeonButton.setFont(new Font("Serif",Font.BOLD,0));
 		challenge_abyss_dungeonButton.addActionListener(buttonActionListener);
 		mainPanel.add(challenge_abyss_dungeonButton);
+		
+		//Image
+		valtanLabel = new JLabel();
+		valtanLabel.setBounds(700,10,150,150);
+		valtanLabel.setVisible(true);
+		mainPanel.add(valtanLabel);
+		
+		biackissLabel = new JLabel();
+		biackissLabel.setBounds(900,10,150,150);
+		biackissLabel.setVisible(true);
+		mainPanel.add(biackissLabel);
+		
+		kouku_satonLabel = new JLabel();
+		kouku_satonLabel.setBounds(1100,10,150,150);
+		kouku_satonLabel.setVisible(true);
+		mainPanel.add(kouku_satonLabel);
+		
+		abrelshudLabel = new JLabel();
+		abrelshudLabel.setBounds(700,170,150,150);
+		abrelshudLabel.setVisible(true);
+		mainPanel.add(abrelshudLabel);
+		
+		illiakanLabel = new JLabel();
+		illiakanLabel.setBounds(900,170,150,150);
+		illiakanLabel.setVisible(true);
+		mainPanel.add(illiakanLabel);
+		
+		abyssOfKayangelLabel = new JLabel();
+		abyssOfKayangelLabel.setBounds(1100,170,150,150);
+		abyssOfKayangelLabel.setVisible(true);
+		mainPanel.add(abyssOfKayangelLabel);
+		
+		abyssOfVoldaikLabel = new JLabel();
+		abyssOfVoldaikLabel.setBounds(700,330,150,150);
+		abyssOfVoldaikLabel.setVisible(true);
+		mainPanel.add(abyssOfVoldaikLabel);
+		
+		challenge_guardian_conquestLabel = new JLabel();
+		challenge_guardian_conquestLabel.setBounds(900,330,150,150);
+		challenge_guardian_conquestLabel.setVisible(true);
+		mainPanel.add(challenge_guardian_conquestLabel);
+		
+		challenge_abyss_dungeonLabel = new JLabel();
+		challenge_abyss_dungeonLabel.setBounds(1100,330,150,150);
+		challenge_abyss_dungeonLabel.setVisible(true);
+		mainPanel.add(challenge_abyss_dungeonLabel);
 		
 		lostArkMark = new JLabel("LostArk마크가 들어갈 예정");
 		lostArkMark.setBounds(530, 190, 150, 50);
