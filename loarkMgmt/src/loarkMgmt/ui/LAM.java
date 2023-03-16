@@ -2,6 +2,7 @@ package loarkMgmt.ui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -101,7 +102,6 @@ public class LAM extends JFrame{
 	private JTextArea charInfoTextArea;
 	
 
-
 	public static void main(String[] args){
 		EventQueue.invokeLater(new Runnable() {
 			@Override
@@ -165,6 +165,7 @@ public class LAM extends JFrame{
 				 
 			}
 			if(e.getSource()==valtanButton) {
+				try {
 				String value = valtanButton.getText();
 				if(value.equals("false")) {
 					valtanButton.setText("true");
@@ -172,8 +173,12 @@ public class LAM extends JFrame{
 					valtanButton.setText("false");
 				}
 				saveHomeWorkData();
+				}catch(Exception e1) {
+					System.out.println("어케 누름?! 빨리 만든사람한테 말해주셈");
+				}
 			}
 			if(e.getSource()==biackissButton) {
+				try {
 				String value = biackissButton.getText();
 				if(value.equals("false")) {
 					biackissButton.setText("true");
@@ -181,8 +186,12 @@ public class LAM extends JFrame{
 					biackissButton.setText("false");
 				}
 				saveHomeWorkData();
+				}catch(Exception e1) {
+					System.out.println("어케 누름?! 빨리 만든사람한테 말해주셈");
+				}
 			}
 			if(e.getSource()==kouku_satonButton) {
+				try {
 				String value = kouku_satonButton.getText();
 				if(value.equals("false")) {
 					kouku_satonButton.setText("true");
@@ -190,8 +199,12 @@ public class LAM extends JFrame{
 					kouku_satonButton.setText("false");
 				}
 				saveHomeWorkData();
+				}catch(Exception e1) {
+					System.out.println("어케 누름?! 빨리 만든사람한테 말해주셈");
+				}
 			}
 			if(e.getSource()==abrelshudButton) {
+				try {
 				String value = abrelshudButton.getText();
 				if(value.equals("false")) {
 					abrelshudButton.setText("true");
@@ -199,8 +212,12 @@ public class LAM extends JFrame{
 					abrelshudButton.setText("false");
 				}
 				saveHomeWorkData();
+				}catch(Exception e1) {
+					System.out.println("어케 누름?! 빨리 만든사람한테 말해주셈");
+				}
 			}
 			if(e.getSource()==illiakanButton) {
+				try {
 				String value = illiakanButton.getText();
 				if(value.equals("false")) {
 					illiakanButton.setText("true");
@@ -208,8 +225,12 @@ public class LAM extends JFrame{
 					illiakanButton.setText("false");
 				}
 				saveHomeWorkData();
+				}catch(Exception e1) {
+					System.out.println("어케 누름?! 빨리 만든사람한테 말해주셈");
+				}
 			}
 			if(e.getSource()==abyssOfKayangelButton) {
+				try {
 				String value = abyssOfKayangelButton.getText();
 				if(value.equals("false")) {
 					abyssOfKayangelButton.setText("true");
@@ -217,8 +238,12 @@ public class LAM extends JFrame{
 					abyssOfKayangelButton.setText("false");
 				}
 				saveHomeWorkData();
+				}catch(Exception e1) {
+					System.out.println("어케 누름?! 빨리 만든사람한테 말해주셈");
+				}
 			}
 			if(e.getSource()==abyssOfVoldaikButton) {
+				try {
 				String value = abyssOfVoldaikButton.getText();
 				if(value.equals("false")) {
 					abyssOfVoldaikButton.setText("true");
@@ -226,8 +251,12 @@ public class LAM extends JFrame{
 					abyssOfVoldaikButton.setText("false");
 				}
 				saveHomeWorkData();
+				}catch(Exception e1) {
+					System.out.println("어케 누름?! 빨리 만든사람한테 말해주셈");
+				}
 			}
 			if(e.getSource()==challenge_guardian_conquestButton) {
+				try {
 				String value = challenge_guardian_conquestButton.getText();
 				if(value.equals("false")) {
 					challenge_guardian_conquestButton.setText("true");
@@ -235,8 +264,12 @@ public class LAM extends JFrame{
 					challenge_guardian_conquestButton.setText("false");
 				}
 				saveHomeWorkData();
+				}catch(Exception e1) {
+					System.out.println("어케 누름?! 빨리 만든사람한테 말해주셈");
+				}
 			}
 			if(e.getSource()==challenge_abyss_dungeonButton) {
+				try {
 				String value = challenge_abyss_dungeonButton.getText();
 				if(value.equals("false")) {
 					challenge_abyss_dungeonButton.setText("true");
@@ -244,6 +277,9 @@ public class LAM extends JFrame{
 					challenge_abyss_dungeonButton.setText("false");
 				}
 				saveHomeWorkData();
+				}catch(Exception e1) {
+					System.out.println("어케 누름?! 빨리 만든사람한테 말해주셈");
+				}
 			}
 		}
 
@@ -448,54 +484,63 @@ public class LAM extends JFrame{
 		valtanButton = new JButton("false");
 		valtanButton.setBounds(700,10,150,150);
 		valtanButton.setEnabled(false);
+		valtanButton.setFont(new Font("Serif",Font.BOLD,0));
 		valtanButton.addActionListener(buttonActionListener);
 		mainPanel.add(valtanButton);
 		
 		biackissButton = new JButton("false");
 		biackissButton.setBounds(900,10,150,150);
 		biackissButton.setEnabled(false);
+		biackissButton.setFont(new Font("Serif",Font.BOLD,0));
 		biackissButton.addActionListener(buttonActionListener);
 		mainPanel.add(biackissButton);
 		
 		kouku_satonButton = new JButton("false");
 		kouku_satonButton.setBounds(1100,10,150,150);
 		kouku_satonButton.setEnabled(false);
+		kouku_satonButton.setFont(new Font("Serif",Font.BOLD,0));
 		kouku_satonButton.addActionListener(buttonActionListener);
 		mainPanel.add(kouku_satonButton);
 		
 		abrelshudButton = new JButton("false");
 		abrelshudButton.setBounds(700,170,150,150);
 		abrelshudButton.setEnabled(false);
+		abrelshudButton.setFont(new Font("Serif",Font.BOLD,0));
 		abrelshudButton.addActionListener(buttonActionListener);
 		mainPanel.add(abrelshudButton);
 		
 		illiakanButton = new JButton("false");
 		illiakanButton.setBounds(900,170,150,150);
 		illiakanButton.setEnabled(false);
+		illiakanButton.setFont(new Font("Serif",Font.BOLD,0));
 		illiakanButton.addActionListener(buttonActionListener);
 		mainPanel.add(illiakanButton);
 		
 		abyssOfKayangelButton = new JButton("false");
 		abyssOfKayangelButton.setBounds(1100,170,150,150);
 		abyssOfKayangelButton.setEnabled(false);
+		abyssOfKayangelButton.setFont(new Font("Serif",Font.BOLD,0));
 		abyssOfKayangelButton.addActionListener(buttonActionListener);
 		mainPanel.add(abyssOfKayangelButton);
 		
 		abyssOfVoldaikButton = new JButton("false");
 		abyssOfVoldaikButton.setBounds(700,330,150,150);
 		abyssOfVoldaikButton.setEnabled(false);
+		abyssOfVoldaikButton.setFont(new Font("Serif",Font.BOLD,0));
 		abyssOfVoldaikButton.addActionListener(buttonActionListener);
 		mainPanel.add(abyssOfVoldaikButton);
 		
 		challenge_guardian_conquestButton = new JButton("false");
 		challenge_guardian_conquestButton.setBounds(900,330,150,150);
 		challenge_guardian_conquestButton.setEnabled(false);
+		challenge_guardian_conquestButton.setFont(new Font("Serif",Font.BOLD,0));
 		challenge_guardian_conquestButton.addActionListener(buttonActionListener);
 		mainPanel.add(challenge_guardian_conquestButton);
 		
 		challenge_abyss_dungeonButton = new JButton("false");
 		challenge_abyss_dungeonButton.setBounds(1100,330,150,150);
 		challenge_abyss_dungeonButton.setEnabled(false);
+		challenge_abyss_dungeonButton.setFont(new Font("Serif",Font.BOLD,0));
 		challenge_abyss_dungeonButton.addActionListener(buttonActionListener);
 		mainPanel.add(challenge_abyss_dungeonButton);
 		
