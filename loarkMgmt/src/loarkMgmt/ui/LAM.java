@@ -336,7 +336,7 @@ public class LAM extends JFrame{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(e.getClickCount() == 1) {
+				if(e.getClickCount() == 2) {
 					selectCharList();
 				}
 			}
