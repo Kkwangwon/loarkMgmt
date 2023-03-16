@@ -64,16 +64,13 @@ public class LAM extends JFrame{
 	private JButton loadUserDataBtn;
 	private JButton saveUserDataBtn;
 	private JButton createUserPaneBtn;
-	private JButton saveUserHomeWorkDataBtn;
 	private JButton deleteUserDataBtn;
 	
 	//DefaultListModel
 	private DefaultListModel<String> charListModel;
-	private DefaultListModel<Boolean> homeWorkListModel;
 	
 	//iist
 	private JList<String> charList;
-	private JList<Boolean> homeWorkList;
 	
 	//textField
 	private JTextField setServerTextField;
