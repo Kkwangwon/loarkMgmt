@@ -422,6 +422,15 @@ public class LAM extends JFrame{
 		abyssOfVoldaikButton.setEnabled(true);
 		challenge_guardian_conquestButton.setEnabled(true);
 		challenge_abyss_dungeonButton.setEnabled(true);
+		valtanButton.setOpaque(false);
+		biackissButton.setOpaque(false);
+		kouku_satonButton.setOpaque(false);
+		abrelshudButton.setOpaque(false);
+		illiakanButton.setOpaque(false);
+		abyssOfKayangelButton.setOpaque(false);
+		abyssOfVoldaikButton.setOpaque(false);
+		challenge_guardian_conquestButton.setOpaque(false);
+		challenge_abyss_dungeonButton.setOpaque(false);
 	}
 	
 	private void setHomeWorkButtonfalse() {
@@ -434,6 +443,15 @@ public class LAM extends JFrame{
 		abyssOfVoldaikButton.setEnabled(false);
 		challenge_guardian_conquestButton.setEnabled(false);
 		challenge_abyss_dungeonButton.setEnabled(false);
+		valtanButton.setOpaque(true);
+		biackissButton.setOpaque(true);
+		kouku_satonButton.setOpaque(true);
+		abrelshudButton.setOpaque(true);
+		illiakanButton.setOpaque(true);
+		abyssOfKayangelButton.setOpaque(true);
+		abyssOfVoldaikButton.setOpaque(true);
+		challenge_guardian_conquestButton.setOpaque(true);
+		challenge_abyss_dungeonButton.setOpaque(true);
 	}
 	
 	private void setBtnImage(JButton btn,JLabel truelabel, JLabel falselabel) {
@@ -459,6 +477,7 @@ public class LAM extends JFrame{
 		btn.setFocusPainted(false);
 		btn.setOpaque(false);
 		btn.setFont(new Font("Serif",Font.BOLD,0));
+		btn.setBackground(Color.DARK_GRAY);
 		btn.addActionListener(buttonActionListener);
 	}
 
@@ -670,13 +689,22 @@ public class LAM extends JFrame{
 		challenge_abyss_dungeonfalseLabel.setVisible(false);
 		mainPanel.add(challenge_abyss_dungeonfalseLabel);
 		
-		
-		
-		
-		
 		lostArkMark = new JLabel(new ImageIcon("resource/logo.png"));
 		lostArkMark.setBounds(530, 190, 150, 50);
 		lostArkMark.setOpaque(false);
+		lostArkMark.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount() == 1) {
+					charListScrollPane.setVisible(false);
+					charListScrollPane.setVisible(false);
+					charInfoScrollPane.setVisible(false);
+					charImageScrollPane.setVisible(false);
+					setHomeWorkButtonfalse();
+				}
+			}
+		});
 		mainPanel.add(lostArkMark);
 		
 		}
@@ -705,8 +733,11 @@ public class LAM extends JFrame{
 					}
 						setHomeWorkButtonfalse();
 						System.out.println("캐릭터정보 저장 완료!");
-					} catch (Exception e1) {
-						System.out.println("캐릭터정보 저장 실패 ㅠ.ㅠ  값을 다시 한번 확인해주세요");
+					}catch(NumberFormatException e2) {
+						System.out.println("레벨은 숫자로만 적으셔야해용!");
+					}
+					catch (Exception e1) {
+						System.out.println("캐릭터 정보입력이 몬가 몬가 잘못됐어요");
 					}
 				}
 			}
