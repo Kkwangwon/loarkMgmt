@@ -172,7 +172,6 @@ public class LAM extends JFrame{
 					String charName = nameInfo[0];
 					FileModuleUtil.userDelete(charName);
 					charListModel.removeElementAt(idx);
-					charListScrollPane.requestFocus(true);
 					System.out.println("삭제가 정상적으로 이루어졌습니다.");
 					setHomeWorkButtonfalse();
 				}else{
@@ -358,6 +357,7 @@ public class LAM extends JFrame{
 
 		charList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		charList.setFocusable(true);
+		charList.setBackground(Color.LIGHT_GRAY);
 		charListScrollPane.setViewportView(charList);
 		charListScrollPane.setVisible(true);
 		if(charList.isSelectionEmpty()) {
@@ -438,6 +438,11 @@ public class LAM extends JFrame{
 	
 	private void setBtnImage(JButton btn,JLabel truelabel, JLabel falselabel) {
 		
+		if(charList.isSelectionEmpty()) {
+			btn.setEnabled(false);
+			truelabel.setVisible(false);
+			falselabel.setVisible(false);
+		}
 		String value = btn.getText();
 		if(value.equals("true")) {
 		truelabel.setVisible(true);
@@ -446,6 +451,7 @@ public class LAM extends JFrame{
 			truelabel.setVisible(false);
 			falselabel.setVisible(!truelabel.isVisible());
 		}
+		
 	}
 	private void btnConfig(JButton btn) {
 		btn.setEnabled(false);
@@ -458,6 +464,7 @@ public class LAM extends JFrame{
 
 	
 	public LAM() throws Exception{
+		
 		/*main Frame*/
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		setTitle("LostArk HomeWork Of Week Management");
@@ -696,8 +703,8 @@ public class LAM extends JFrame{
 					if(!objList.isEmpty()) {
 					loadCharList(objList);
 					}
-						System.out.println("캐릭터정보 저장 완료!");
 						setHomeWorkButtonfalse();
+						System.out.println("캐릭터정보 저장 완료!");
 					} catch (Exception e1) {
 						System.out.println("캐릭터정보 저장 실패 ㅠ.ㅠ  값을 다시 한번 확인해주세요");
 					}
