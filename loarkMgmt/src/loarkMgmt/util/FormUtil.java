@@ -4,7 +4,7 @@ import org.json.simple.JSONObject;
 
 public class FormUtil {
 	
-	public static String jsonToTextareaForm(JSONObject obj, String[] key) {
+	public static String jsonToTextareaFormUser(JSONObject obj, String[] key) {
 		StringBuilder sb = new StringBuilder();
 		String[] userKey = {"서버","이름","레벨","직업군","클래스"};
 		for(int i = 0; i<key.length; i++) {

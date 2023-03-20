@@ -3,32 +3,24 @@ package loarkMgmt.ui;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -37,10 +29,8 @@ import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 
 import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
 
 import loarkMgmt.dto.UserDto;
-import loarkMgmt.ui.LAM.SetCharInfoFrame;
 import loarkMgmt.util.FileModuleUtil;
 import loarkMgmt.util.FormUtil;
 import loarkMgmt.util.SetUtil;
@@ -48,6 +38,8 @@ import loarkMgmt.util.TextAreaOutputStream;
 
 public class LAM extends JFrame{
 	
+	private static final long serialVersionUID = 7027644454076305073L;
+
 	//main panel
 	private JPanel mainPanel;
 	
@@ -77,7 +69,6 @@ public class LAM extends JFrame{
 	private JList<String> charList;
 	
 	//textField
-	private JTextField setServerTextField;
 	private JTextField setNameTextField;
 	private JTextField setLevelTextField;
 	private JTextField setCharClassTextField;
@@ -123,7 +114,7 @@ public class LAM extends JFrame{
 	private JTextArea charInfoTextArea;
 	
 	//comboBox
-	private JComboBox serverSelect;
+	private JComboBox<String> serverSelect;
 	
 
 	public static void main(String[] args){
@@ -382,7 +373,7 @@ public class LAM extends JFrame{
 			String charName = nameInfo[0];
 			JSONObject hObj = FileModuleUtil.loadHomeWorkData(charName);
 			JSONObject obj = FileModuleUtil.loadCharData(charName);
-			String insert = FormUtil.jsonToTextareaForm(obj, UserDto.userKey);
+			String insert = FormUtil.jsonToTextareaFormUser(obj, UserDto.userKey);
 			charImageScrollPane.setVisible(true);
 			charInfoScrollPane.setVisible(true);
 			charInfoTextArea.setText(insert);
@@ -504,7 +495,7 @@ public class LAM extends JFrame{
 		/*main Frame*/
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		setTitle("LostArk HomeWork Of Week Management");
-		setSize(1280,640);
+		setSize(1360,760);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -518,7 +509,7 @@ public class LAM extends JFrame{
 		
 		/*logScrollPane*/
 		logScrollPane = new JScrollPane();
-		logScrollPane.setBounds(12,509,1240,80);
+		logScrollPane.setBounds(12,629,1320,80);
 		mainPanel.add(logScrollPane);
 		logTextArea = new JTextArea();
 		logScrollPane.setViewportView(logTextArea);
@@ -533,34 +524,34 @@ public class LAM extends JFrame{
 		
 		createUserPaneBtn = new JButton("유저 정보 설정");
 		createUserPaneBtn.addActionListener(buttonActionListener);
-		createUserPaneBtn.setBounds(10,450,150,30);
+		createUserPaneBtn.setBounds(10,570,150,30);
 		mainPanel.add(createUserPaneBtn);
 		
 		loadUserDataBtn = new JButton("유저 정보 로드");
 		loadUserDataBtn.addActionListener(buttonActionListener);
-		loadUserDataBtn.setBounds(185,450,150,30);
+		loadUserDataBtn.setBounds(185,570,150,30);
 		mainPanel.add(loadUserDataBtn);
 		
 		deleteUserDataBtn = new JButton("유저 정보 삭제");
 		deleteUserDataBtn.addActionListener(buttonActionListener);
-		deleteUserDataBtn.setBounds(361,450,150,30);
+		deleteUserDataBtn.setBounds(361,570,150,30);
 		mainPanel.add(deleteUserDataBtn);
 		
 		charListScrollPane = new JScrollPane();
 		charListScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		charListScrollPane.setBounds(10,10,500,190);
+		charListScrollPane.setBounds(10,10,500,310);
 		charListScrollPane.setVisible(false);
 		mainPanel.add(charListScrollPane);
 
 		charImageScrollPane = new JScrollPane();
 		charImageScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		charImageScrollPane.setBounds(10,203,240,190);
+		charImageScrollPane.setBounds(10,323,240,190);
 		charImageScrollPane.setVisible(false);
 		mainPanel.add(charImageScrollPane);
 		
 		charInfoScrollPane = new JScrollPane();
 		charInfoScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		charInfoScrollPane.setBounds(270,203,240,190);
+		charInfoScrollPane.setBounds(270,323,240,190);
 		mainPanel.add(charInfoScrollPane);
 		charInfoTextArea = new JTextArea();
 		charInfoTextArea.setBackground(Color.LIGHT_GRAY);
@@ -570,144 +561,141 @@ public class LAM extends JFrame{
 		charInfoTextArea.setLineWrap(true);
 		charInfoTextArea.setWrapStyleWord(true);
 		
+		
+		//레이드
 		valtanButton = new JButton("false");
-		valtanButton.setBounds(700,10,150,150);
+		valtanButton.setBounds(580,30,150,150);
 		btnConfig(valtanButton);
 		mainPanel.add(valtanButton);
 		
 		biackissButton = new JButton("false");
-		biackissButton.setBounds(900,10,150,150);
+		biackissButton.setBounds(750,30,150,150);
 		btnConfig(biackissButton);
 		mainPanel.add(biackissButton);
 		
 		kouku_satonButton = new JButton("false");
-		kouku_satonButton.setBounds(1100,10,150,150);
+		kouku_satonButton.setBounds(920,30,150,150);
 		btnConfig(kouku_satonButton);
 		mainPanel.add(kouku_satonButton);
 		
 		abrelshudButton = new JButton("false");
-		abrelshudButton.setBounds(700,170,150,150);
+		abrelshudButton.setBounds(1090,30,150,150);
 		btnConfig(abrelshudButton);
 		mainPanel.add(abrelshudButton);
 		
 		illiakanButton = new JButton("false");
-		illiakanButton.setBounds(900,170,150,150);
+		illiakanButton.setBounds(1260,30,150,150);
 		btnConfig(illiakanButton);
 		mainPanel.add(illiakanButton);
 		
+		//어비스 던전
 		abyssOfKayangelButton = new JButton("false");
-		abyssOfKayangelButton.setBounds(1100,170,150,150);
+		abyssOfKayangelButton.setBounds(580,170,150,150);
 		btnConfig(abyssOfKayangelButton);
 		mainPanel.add(abyssOfKayangelButton);
 		
 		abyssOfVoldaikButton = new JButton("false");
-		abyssOfVoldaikButton.setBounds(700,330,150,150);
+		abyssOfVoldaikButton.setBounds(750,170,150,150);
 		btnConfig(abyssOfVoldaikButton);
 		mainPanel.add(abyssOfVoldaikButton);
 		
+		//도비스, 도가토
 		challenge_guardian_conquestButton = new JButton("false");
-		challenge_guardian_conquestButton.setBounds(900,330,150,150);
+		challenge_guardian_conquestButton.setBounds(580,330,150,150);
 		btnConfig(challenge_guardian_conquestButton);
 		mainPanel.add(challenge_guardian_conquestButton);
 		
 		challenge_abyss_dungeonButton = new JButton("false");
-		challenge_abyss_dungeonButton.setBounds(1100,330,150,150);
+		challenge_abyss_dungeonButton.setBounds(750,330,150,150);
 		btnConfig(challenge_abyss_dungeonButton);
 		mainPanel.add(challenge_abyss_dungeonButton);
 		
 		//Image
 		valtantrueLabel = new JLabel(new ImageIcon("resource/true.png"));
-		valtantrueLabel.setBounds(700,10,150,150);
+		valtantrueLabel.setBounds(valtanButton.getBounds());
 		valtantrueLabel.setVisible(false);
 		mainPanel.add(valtantrueLabel);
-		
-		biackisstrueLabel = new JLabel(new ImageIcon("resource/true.png"));
-		biackisstrueLabel.setBounds(900,10,150,150);
-		biackisstrueLabel.setVisible(false);
-		mainPanel.add(biackisstrueLabel);
-		
-		kouku_satontrueLabel = new JLabel(new ImageIcon("resource/true.png"));
-		kouku_satontrueLabel.setBounds(1100,10,150,150);
-		kouku_satontrueLabel.setVisible(false);
-		mainPanel.add(kouku_satontrueLabel);
-		
-		abrelshudtrueLabel = new JLabel(new ImageIcon("resource/true.png"));
-		abrelshudtrueLabel.setBounds(700,170,150,150);
-		abrelshudtrueLabel.setVisible(false);
-		mainPanel.add(abrelshudtrueLabel);
-		
-		illiakantrueLabel = new JLabel(new ImageIcon("resource/true.png"));
-		illiakantrueLabel.setBounds(900,170,150,150);
-		illiakantrueLabel.setVisible(false);
-		mainPanel.add(illiakantrueLabel);
-		
-		abyssOfKayangeltrueLabel = new JLabel(new ImageIcon("resource/true.png"));
-		abyssOfKayangeltrueLabel.setBounds(1100,170,150,150);
-		abyssOfKayangeltrueLabel.setVisible(false);
-		mainPanel.add(abyssOfKayangeltrueLabel);
-		
-		abyssOfVoldaiktrueLabel = new JLabel(new ImageIcon("resource/true.png"));
-		abyssOfVoldaiktrueLabel.setBounds(700,330,150,150);
-		abyssOfVoldaiktrueLabel.setVisible(false);
-		mainPanel.add(abyssOfVoldaiktrueLabel);
-		
-		challenge_guardian_conquesttrueLabel = new JLabel(new ImageIcon("resource/true.png"));
-		challenge_guardian_conquesttrueLabel.setBounds(900,330,150,150);
-		challenge_guardian_conquesttrueLabel.setVisible(false);
-		mainPanel.add(challenge_guardian_conquesttrueLabel);
-		
-		challenge_abyss_dungeontrueLabel = new JLabel(new ImageIcon("resource/true.png"));
-		challenge_abyss_dungeontrueLabel.setBounds(1100,330,150,150);
-		challenge_abyss_dungeontrueLabel.setVisible(false);
-		mainPanel.add(challenge_abyss_dungeontrueLabel);
-
 		valtanfalseLabel = new JLabel(new ImageIcon("resource/false.png"));
-		valtanfalseLabel.setBounds(700,10,150,150);
+		valtanfalseLabel.setBounds(valtanButton.getBounds());
 		valtanfalseLabel.setVisible(false);
 		mainPanel.add(valtanfalseLabel);
 		
+		biackisstrueLabel = new JLabel(new ImageIcon("resource/true.png"));
+		biackisstrueLabel.setBounds(biackissButton.getBounds());
+		biackisstrueLabel.setVisible(false);
+		mainPanel.add(biackisstrueLabel);
 		biackissfalseLabel = new JLabel(new ImageIcon("resource/false.png"));
-		biackissfalseLabel.setBounds(900,10,150,150);
+		biackissfalseLabel.setBounds(biackissButton.getBounds());
 		biackissfalseLabel.setVisible(false);
 		mainPanel.add(biackissfalseLabel);
 		
+		kouku_satontrueLabel = new JLabel(new ImageIcon("resource/true.png"));
+		kouku_satontrueLabel.setBounds(kouku_satonButton.getBounds());
+		kouku_satontrueLabel.setVisible(false);
+		mainPanel.add(kouku_satontrueLabel);
 		kouku_satonfalseLabel = new JLabel(new ImageIcon("resource/false.png"));
-		kouku_satonfalseLabel.setBounds(1100,10,150,150);
+		kouku_satonfalseLabel.setBounds(kouku_satonButton.getBounds());
 		kouku_satonfalseLabel.setVisible(false);
 		mainPanel.add(kouku_satonfalseLabel);
 		
+		abrelshudtrueLabel = new JLabel(new ImageIcon("resource/true.png"));
+		abrelshudtrueLabel.setBounds(abrelshudButton.getBounds());
+		abrelshudtrueLabel.setVisible(false);
+		mainPanel.add(abrelshudtrueLabel);
 		abrelshudfalseLabel = new JLabel(new ImageIcon("resource/false.png"));
-		abrelshudfalseLabel.setBounds(700,170,150,150);
+		abrelshudfalseLabel.setBounds(abrelshudButton.getBounds());
 		abrelshudfalseLabel.setVisible(false);
 		mainPanel.add(abrelshudfalseLabel);
 		
+		illiakantrueLabel = new JLabel(new ImageIcon("resource/true.png"));
+		illiakantrueLabel.setBounds(illiakanButton.getBounds());
+		illiakantrueLabel.setVisible(false);
+		mainPanel.add(illiakantrueLabel);
 		illiakanfalseLabel = new JLabel(new ImageIcon("resource/false.png"));
-		illiakanfalseLabel.setBounds(900,170,150,150);
+		illiakanfalseLabel.setBounds(illiakanButton.getBounds());
 		illiakanfalseLabel.setVisible(false);
 		mainPanel.add(illiakanfalseLabel);
 		
+		//어비스
+		abyssOfKayangeltrueLabel = new JLabel(new ImageIcon("resource/true.png"));
+		abyssOfKayangeltrueLabel.setBounds(abyssOfKayangelButton.getBounds());
+		abyssOfKayangeltrueLabel.setVisible(false);
+		mainPanel.add(abyssOfKayangeltrueLabel);
 		abyssOfKayangelfalseLabel = new JLabel(new ImageIcon("resource/false.png"));
-		abyssOfKayangelfalseLabel.setBounds(1100,170,150,150);
+		abyssOfKayangelfalseLabel.setBounds(abyssOfVoldaikButton.getBounds());
 		abyssOfKayangelfalseLabel.setVisible(false);
 		mainPanel.add(abyssOfKayangelfalseLabel);
 		
+		abyssOfVoldaiktrueLabel = new JLabel(new ImageIcon("resource/true.png"));
+		abyssOfVoldaiktrueLabel.setBounds(abyssOfVoldaikButton);
+		abyssOfVoldaiktrueLabel.setVisible(false);
+		mainPanel.add(abyssOfVoldaiktrueLabel);
 		abyssOfVoldaikfalseLabel = new JLabel(new ImageIcon("resource/false.png"));
-		abyssOfVoldaikfalseLabel.setBounds(700,330,150,150);
+		abyssOfVoldaikfalseLabel.setBounds(750,170,150,150);
 		abyssOfVoldaikfalseLabel.setVisible(false);
 		mainPanel.add(abyssOfVoldaikfalseLabel);
 		
+		//도가토 도비스
+		challenge_guardian_conquesttrueLabel = new JLabel(new ImageIcon("resource/true.png"));
+		challenge_guardian_conquesttrueLabel.setBounds(580,330,150,150);
+		challenge_guardian_conquesttrueLabel.setVisible(false);
+		mainPanel.add(challenge_guardian_conquesttrueLabel);
 		challenge_guardian_conquestfalseLabel = new JLabel(new ImageIcon("resource/false.png"));
-		challenge_guardian_conquestfalseLabel.setBounds(900,330,150,150);
+		challenge_guardian_conquestfalseLabel.setBounds(580,330,150,150);
 		challenge_guardian_conquestfalseLabel.setVisible(false);
 		mainPanel.add(challenge_guardian_conquestfalseLabel);
 		
+		challenge_abyss_dungeontrueLabel = new JLabel(new ImageIcon("resource/true.png"));
+		challenge_abyss_dungeontrueLabel.setBounds(750,330,150,150);
+		challenge_abyss_dungeontrueLabel.setVisible(false);
+		mainPanel.add(challenge_abyss_dungeontrueLabel);
 		challenge_abyss_dungeonfalseLabel = new JLabel(new ImageIcon("resource/false.png"));
-		challenge_abyss_dungeonfalseLabel.setBounds(1100,330,150,150);
+		challenge_abyss_dungeonfalseLabel.setBounds(750,330,150,150);
 		challenge_abyss_dungeonfalseLabel.setVisible(false);
 		mainPanel.add(challenge_abyss_dungeonfalseLabel);
 		
 		lostArkMark = new JLabel(new ImageIcon("resource/logo.png"));
-		lostArkMark.setBounds(530, 190, 150, 50);
+		lostArkMark.setBounds(530, 560, 150, 50);
 		lostArkMark.setOpaque(false);
 		lostArkMark.addMouseListener(new MouseAdapter() {
 			
@@ -727,6 +715,8 @@ public class LAM extends JFrame{
 		}
 	
 	class SetCharInfoFrame extends JFrame{
+		
+		private static final long serialVersionUID = -8203034143592938511L;
 		
 		public ActionListener userConfigButtonActionListener = new ActionListener() {
 			
@@ -770,7 +760,7 @@ public class LAM extends JFrame{
 			
 			/*comdoBox*/
 			String[] server = {"루페온","카마인","카단","아만","니나브","카제로스","아브렐슈드","실리안"};
-			serverSelect = new JComboBox(server);
+			serverSelect = new JComboBox<String>(server);
 			serverSelect.setLocation(95,60);
 			serverSelect.setSize(200,30);
 			charSetPanel.add(serverSelect);
