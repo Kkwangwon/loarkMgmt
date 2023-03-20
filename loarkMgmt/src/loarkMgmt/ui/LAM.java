@@ -6,6 +6,9 @@ import java.awt.Font;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -18,6 +21,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -118,6 +122,9 @@ public class LAM extends JFrame{
 	private JTextArea logTextArea;
 	private JTextArea charInfoTextArea;
 	
+	//comboBox
+	private JComboBox serverSelect;
+	
 
 	public static void main(String[] args){
 		EventQueue.invokeLater(new Runnable() {
@@ -172,6 +179,8 @@ public class LAM extends JFrame{
 					String charName = nameInfo[0];
 					FileModuleUtil.userDelete(charName);
 					charListModel.removeElementAt(idx);
+					charInfoTextArea.setText(""
+							);
 					System.out.println("삭제가 정상적으로 이루어졌습니다.");
 					setHomeWorkButtonfalse();
 				}else{
@@ -480,6 +489,14 @@ public class LAM extends JFrame{
 		btn.setBackground(Color.DARK_GRAY);
 		btn.addActionListener(buttonActionListener);
 	}
+	private boolean isInteger(String str) {
+		try {
+		Integer.parseInt(str);
+		return true;
+		}catch(NumberFormatException e) {
+		return false;
+		}
+	}
 
 	
 	public LAM() throws Exception{
@@ -717,7 +734,7 @@ public class LAM extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource()==saveUserDataBtn) {
 					try {
-					String server = setServerTextField.getText();
+					String server = (String) serverSelect.getSelectedItem();
 					String name = setNameTextField.getText();
 					int level = Integer.parseInt(setLevelTextField.getText());
 					String charClass = setCharClassTextField.getText();
@@ -751,12 +768,12 @@ public class LAM extends JFrame{
 			setContentPane(charSetPanel);
 			charSetPanel.setLayout(null);
 			
-			setServerTextField = new JTextField();
-			setServerTextField.setText("");
-			setServerTextField.setColumns(12);
-			setServerTextField.setLocation(95,60);
-			setServerTextField.setSize(200,30);
-			charSetPanel.add(setServerTextField);
+			/*comdoBox*/
+			String[] server = {"루페온","카마인","카단","아만","니나브","카제로스","아브렐슈드","실리안"};
+			serverSelect = new JComboBox(server);
+			serverSelect.setLocation(95,60);
+			serverSelect.setSize(200,30);
+			charSetPanel.add(serverSelect);
 			
 			setNameTextField = new JTextField();
 			setNameTextField.setText("");
@@ -770,6 +787,17 @@ public class LAM extends JFrame{
 			setLevelTextField.setColumns(12);
 			setLevelTextField.setLocation(95,180);
 			setLevelTextField.setSize(200,30);
+			setLevelTextField.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(!setLevelTextField.getText().equals("") && !isInteger(setLevelTextField.getText())) {
+						setLevelTextField.setText("");
+						setLevelTextField.createToolTip();
+						setLevelTextField.setToolTipText("레벨은 숫자로!");
+						System.out.println("레벨은 숫자로!");
+					}
+				 }
+			});
 			charSetPanel.add(setLevelTextField);
 			
 			setCharClassTextField = new JTextField();
