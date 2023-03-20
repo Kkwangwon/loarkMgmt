@@ -667,7 +667,7 @@ public class LAM extends JFrame{
 		mainPanel.add(abyssOfKayangelfalseLabel);
 		
 		abyssOfVoldaiktrueLabel = new JLabel(new ImageIcon("resource/true.png"));
-		abyssOfVoldaiktrueLabel.setBounds(abyssOfVoldaikButton);
+		abyssOfVoldaiktrueLabel.setBounds(abyssOfVoldaikButton.getBounds());
 		abyssOfVoldaiktrueLabel.setVisible(false);
 		mainPanel.add(abyssOfVoldaiktrueLabel);
 		abyssOfVoldaikfalseLabel = new JLabel(new ImageIcon("resource/false.png"));
